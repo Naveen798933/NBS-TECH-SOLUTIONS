@@ -12,45 +12,53 @@ import TechStackMarquee from "@/components/TechStackMarquee";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import ProfileModal from "@/components/ProfileModal";
+import FloatingDock from "@/components/FloatingDock";
+import { ToastProvider } from "@/components/Toast";
 import { TeamMember } from "@/data/team";
 
 export default function Home() {
   const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
 
   return (
-    <main className="min-h-screen bg-[#05070D] text-[#F5F7FA] relative selection:bg-[#2E6BFF]/30 selection:text-white">
-      {/* Sticky Navigation */}
-      <Navbar />
+    <ToastProvider>
+      <main className="min-h-screen bg-[#05070D] text-[#F5F7FA] relative selection:bg-[#2E6BFF]/30 selection:text-white">
+        {/* Sticky Navigation with Scroll Progress Bar & Live Status */}
+        <Navbar />
 
-      {/* Hero Section with Interactive Team Image & Hotspots */}
-      <Hero onSelectMember={setSelectedMember} />
+        {/* Hero Section with Interactive Team Image, Metrics Ribbon & Shimmer CTA */}
+        <Hero onSelectMember={setSelectedMember} />
 
-      {/* About Us */}
-      <About />
+        {/* About Us with Mouse Spotlight Cards */}
+        <About />
 
-      {/* Services Portfolio */}
-      <Services />
+        {/* Services Portfolio with Expandable Capabilities & Mouse Spotlight */}
+        <Services />
 
-      {/* Meet the Team Showcase */}
-      <TeamSection onSelectMember={setSelectedMember} />
+        {/* Meet the Team Showcase with Direct Dial & Resume Downloads */}
+        <TeamSection onSelectMember={setSelectedMember} />
 
-      {/* Verified Projects Showcase */}
-      <ProjectShowcase onSelectMember={setSelectedMember} />
+        {/* Verified Projects Showcase with Instant Search & Tech Filter */}
+        <ProjectShowcase onSelectMember={setSelectedMember} />
 
-      {/* Tech Stack Marquee */}
-      <TechStackMarquee />
+        {/* Tech Stack Marquee */}
+        <TechStackMarquee />
 
-      {/* Contact Section */}
-      <Contact />
+        {/* Contact Section with Click-to-Dial & Automated Gmail Routing */}
+        <Contact />
 
-      {/* Footer */}
-      <Footer />
+        {/* Footer */}
+        <Footer />
 
-      {/* Shared Signature Profile Modal */}
-      <ProfileModal
-        member={selectedMember}
-        onClose={() => setSelectedMember(null)}
-      />
-    </main>
+        {/* Floating Quick Action Dock */}
+        <FloatingDock />
+
+        {/* Tabbed Executive Profile Modal */}
+        <ProfileModal
+          member={selectedMember}
+          onClose={() => setSelectedMember(null)}
+        />
+      </main>
+    </ToastProvider>
   );
 }
+

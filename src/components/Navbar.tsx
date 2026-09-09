@@ -21,10 +21,17 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 24);
+
+      // Scroll progress computation
+      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalScroll > 0) {
+        setScrollProgress(Math.min(100, Math.max(0, (window.scrollY / totalScroll) * 100)));
+      }
 
       // Scroll spy for active section
       const sections = navLinks.map((link) => link.href.substring(1));
@@ -47,10 +54,18 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-[#05070D]/80 backdrop-blur-xl border-b border-white/[0.07] py-3 shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
+          ? "bg-[#05070D]/85 backdrop-blur-xl border-b border-white/[0.07] py-3 shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
           : "bg-transparent py-5"
       }`}
     >
+      {/* Radiant Viewport Scroll Progress Bar */}
+      <div className="absolute top-0 left-0 right-0 h-[2.5px] bg-white/[0.03] overflow-hidden">
+        <div
+          className="h-full bg-gradient-to-r from-[#2E6BFF] via-[#5B8CFF] to-[#00D2FF] shadow-[0_0_10px_#00D2FF] transition-[width] duration-150 ease-out"
+          style={{ width: `${scrollProgress}%` }}
+        />
+      </div>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         {/* Brand Logo */}
         <a
@@ -113,8 +128,13 @@ export default function Navbar() {
           })}
         </nav>
 
-        {/* Desktop CTA */}
-        <div className="hidden md:flex items-center gap-4">
+        {/* Desktop CTA & Live Availability */}
+        <div className="hidden md:flex items-center gap-3">
+          <div className="hidden lg:inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0B0F1A]/80 border border-white/10 text-[11px] font-mono text-emerald-400">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 live-dot-pulse" />
+            <span>Open for Q3/Q4</span>
+          </div>
+
           <a
             href="#contact"
             className="group relative inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-white rounded-full bg-gradient-to-r from-[#2E6BFF] to-[#1B4ED8] hover:from-[#3D79FF] hover:to-[#2257F6] border border-white/20 shadow-[0_0_20px_rgba(46,107,255,0.4)] hover:shadow-[0_0_28px_rgba(46,107,255,0.6)] transition-all duration-200 hover:-translate-y-0.5"

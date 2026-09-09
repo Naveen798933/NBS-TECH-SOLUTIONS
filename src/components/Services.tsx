@@ -76,7 +76,12 @@ export default function Services() {
                   delay: index * 0.08,
                   ease: easing.standard,
                 }}
-                className={`group relative rounded-2xl sm:rounded-3xl p-6 sm:p-8 bg-[#0B0F1A]/80 backdrop-blur-md border transition-all duration-300 flex flex-col justify-between ${
+                onMouseMove={(e) => {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  e.currentTarget.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
+                  e.currentTarget.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
+                }}
+                className={`spotlight-card group relative rounded-2xl sm:rounded-3xl p-6 sm:p-8 bg-[#0B0F1A]/80 backdrop-blur-md border transition-all duration-300 flex flex-col justify-between ${
                   isExpanded
                     ? "border-[#2E6BFF]/60 shadow-[0_12px_40px_rgba(46,107,255,0.25)] bg-[#0E1424]"
                     : "border-white/[0.08] hover:border-[#2E6BFF]/40 hover:bg-[#0E1424] hover:-translate-y-1"

@@ -100,7 +100,7 @@ export default function Hero({ onSelectMember }: HeroProps) {
         >
           <a
             href="#team"
-            className="w-full sm:w-auto px-7 py-3.5 rounded-full font-semibold text-sm text-white bg-gradient-to-r from-[#2E6BFF] to-[#1B4ED8] hover:from-[#3D79FF] hover:to-[#2257F6] border border-white/20 shadow-[0_0_30px_rgba(46,107,255,0.45)] hover:shadow-[0_0_40px_rgba(46,107,255,0.7)] transition-all duration-200 hover:-translate-y-0.5 flex items-center justify-center gap-2"
+            className="btn-shimmer w-full sm:w-auto px-7 py-3.5 rounded-full font-semibold text-sm text-white bg-gradient-to-r from-[#2E6BFF] to-[#1B4ED8] hover:from-[#3D79FF] hover:to-[#2257F6] border border-white/20 shadow-[0_0_30px_rgba(46,107,255,0.45)] hover:shadow-[0_0_40px_rgba(46,107,255,0.7)] transition-all duration-200 hover:-translate-y-0.5 flex items-center justify-center gap-2"
           >
             <span>Explore Our Team</span>
             <ChevronRight className="w-4 h-4" />
@@ -112,6 +112,31 @@ export default function Hero({ onSelectMember }: HeroProps) {
           >
             <span>View Our Work</span>
           </a>
+        </motion.div>
+
+        {/* Executive Verified Metrics Ribbon */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.35, duration: duration.base }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 pt-2 w-full max-w-3xl"
+        >
+          <div className="p-3.5 rounded-2xl bg-[#0B0F1A]/80 border border-white/[0.08] hover:border-[#2E6BFF]/40 backdrop-blur-md text-center transition-colors">
+            <div className="text-xl sm:text-2xl font-extrabold text-white tracking-tight">3</div>
+            <div className="text-[11px] text-[#8B93A7] font-medium mt-0.5">Founding Engineers</div>
+          </div>
+          <div className="p-3.5 rounded-2xl bg-[#0B0F1A]/80 border border-white/[0.08] hover:border-[#2E6BFF]/40 backdrop-blur-md text-center transition-colors">
+            <div className="text-xl sm:text-2xl font-extrabold text-white tracking-tight">13+</div>
+            <div className="text-[11px] text-[#8B93A7] font-medium mt-0.5">Verified Projects</div>
+          </div>
+          <div className="p-3.5 rounded-2xl bg-[#0B0F1A]/80 border border-white/[0.08] hover:border-[#2E6BFF]/40 backdrop-blur-md text-center transition-colors">
+            <div className="text-xl sm:text-2xl font-extrabold text-emerald-400 tracking-tight">100%</div>
+            <div className="text-[11px] text-[#8B93A7] font-medium mt-0.5">Documented Records</div>
+          </div>
+          <div className="p-3.5 rounded-2xl bg-[#0B0F1A]/80 border border-white/[0.08] hover:border-[#2E6BFF]/40 backdrop-blur-md text-center transition-colors">
+            <div className="text-xl sm:text-2xl font-extrabold text-[#00D2FF] tracking-tight">&lt; 24h</div>
+            <div className="text-[11px] text-[#8B93A7] font-medium mt-0.5">Direct Response</div>
+          </div>
         </motion.div>
 
         {/* Secondary Subtitle */}

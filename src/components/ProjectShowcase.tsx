@@ -1,12 +1,15 @@
 // src/components/ProjectShowcase.tsx
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   FolderGit2,
   ArrowUpRight,
   User,
+  Search,
+  X,
+  Sparkles,
 } from "lucide-react";
 import { projects } from "@/data/projects";
 import { teamMembers, TeamMember } from "@/data/team";
@@ -28,11 +31,25 @@ export default function ProjectShowcase({
   onSelectMember,
 }: ProjectShowcaseProps) {
   const [activeCategory, setActiveCategory] = useState<string>("All");
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
-  const filteredProjects =
-    activeCategory === "All"
-      ? projects
-      : projects.filter((p) => p.category === activeCategory);
+  const filteredProjects = useMemo(() => {
+    return projects.filter((p) => {
+      const matchesCategory =
+        activeCategory === "All" || p.category === activeCategory;
+      if (!matchesCategory) return false;
+
+      if (!searchQuery.trim()) return true;
+      const q = searchQuery.toLowerCase().trim();
+      return (
+        p.title.toLowerCase().includes(q) ||
+        p.subtitle.toLowerCase().includes(q) ||
+        p.description.toLowerCase().includes(q) ||
+        p.tech.some((t) => t.toLowerCase().includes(q)) ||
+        p.authorName.toLowerCase().includes(q)
+      );
+    });
+  }, [activeCategory, searchQuery]);
 
   const handleAuthorClick = (authorId: string) => {
     const member = teamMembers.find((m) => m.id === authorId);
@@ -48,7 +65,7 @@ export default function ProjectShowcase({
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-12 sm:mb-16">
+        <div className="text-center max-w-3xl mx-auto space-y-4 mb-10 sm:mb-14">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0B0F1A] border border-white/10 text-xs font-mono uppercase tracking-widest text-[#00D2FF]">
             <FolderGit2 className="w-3.5 h-3.5" />
             <span>Verified Portfolio Work</span>
@@ -67,48 +84,118 @@ export default function ProjectShowcase({
           </p>
         </div>
 
-        {/* Filter Tabs */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-12" role="tablist" aria-label="Project Categories">
-          {categories.map((cat) => {
-            const isActive = activeCategory === cat;
-            return (
+        {/* Search & Filter Controls */}
+        <div className="space-y-5 max-w-4xl mx-auto mb-12">
+          {/* Instant Search Bar */}
+          <div className="relative max-w-md mx-auto">
+            <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#8B93A7]">
+              <Search className="w-4 h-4" />
+            </div>
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search by tech or keyword (e.g. Next.js, Python, Docker)..."
+              className="w-full pl-10 pr-10 py-2.5 rounded-full bg-[#0B0F1A]/90 border border-white/10 focus:border-[#2E6BFF] focus:ring-2 focus:ring-[#2E6BFF]/30 text-xs text-white placeholder:text-[#8B93A7] transition-all outline-none shadow-inner"
+            />
+            {searchQuery && (
               <button
-                key={cat}
-                role="tab"
-                aria-selected={isActive}
-                onClick={() => setActiveCategory(cat)}
-                className={`relative px-4 py-2 rounded-full text-xs font-semibold transition-all duration-200 ${
-                  isActive
-                    ? "text-white bg-[#2E6BFF] shadow-[0_0_20px_rgba(46,107,255,0.5)] border border-white/20"
-                    : "text-[#8B93A7] bg-[#0B0F1A] hover:text-white border border-white/[0.08] hover:border-white/20"
-                }`}
+                onClick={() => setSearchQuery("")}
+                className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-[#8B93A7] hover:text-white transition-colors"
+                aria-label="Clear search query"
               >
-                {cat}
+                <X className="w-4 h-4" />
               </button>
-            );
-          })}
+            )}
+          </div>
+
+          {/* Filter Tabs */}
+          <div className="flex flex-wrap items-center justify-center gap-2" role="tablist" aria-label="Project Categories">
+            {categories.map((cat) => {
+              const isActive = activeCategory === cat;
+              return (
+                <button
+                  key={cat}
+                  role="tab"
+                  aria-selected={isActive}
+                  onClick={() => setActiveCategory(cat)}
+                  className={`relative px-4 py-2 rounded-full text-xs font-semibold transition-all duration-200 ${
+                    isActive
+                      ? "text-white bg-[#2E6BFF] shadow-[0_0_20px_rgba(46,107,255,0.5)] border border-white/20"
+                      : "text-[#8B93A7] bg-[#0B0F1A] hover:text-white border border-white/[0.08] hover:border-white/20"
+                  }`}
+                >
+                  {cat}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Live Counter & Active Search indicator */}
+          <div className="flex items-center justify-between text-xs text-[#8B93A7] px-2 font-mono">
+            <div>
+              Showing <span className="text-white font-bold">{filteredProjects.length}</span> of{" "}
+              <span>{projects.length}</span> verified projects
+            </div>
+            {searchQuery && (
+              <div className="flex items-center gap-1.5 text-[#00D2FF]">
+                <span>Filter: &quot;{searchQuery}&quot;</span>
+                <button
+                  onClick={() => setSearchQuery("")}
+                  className="underline hover:text-white text-[11px]"
+                >
+                  Clear
+                </button>
+              </div>
+            )}
+          </div>
         </div>
 
-        {/* Projects Grid */}
-        <motion.div
-          layout
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
-          <AnimatePresence>
-            {filteredProjects.map((project, idx) => (
-              <motion.div
-                layout
-                key={project.id}
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{
-                  duration: duration.base,
-                  ease: easing.standard,
-                  delay: idx * 0.04,
-                }}
-                className="group relative rounded-2xl sm:rounded-3xl p-6 bg-[#0B0F1A]/80 backdrop-blur-md border border-white/[0.08] hover:border-[#2E6BFF]/40 hover:bg-[#0E1424] transition-all duration-300 flex flex-col justify-between hover:-translate-y-1 shadow-[0_8px_30px_rgba(0,0,0,0.5)]"
-              >
+        {/* Projects Grid or Empty State */}
+        {filteredProjects.length === 0 ? (
+          <div className="text-center py-16 px-4 rounded-3xl bg-[#0B0F1A]/60 border border-white/10 max-w-lg mx-auto space-y-4">
+            <div className="w-12 h-12 rounded-2xl bg-[#2E6BFF]/20 border border-[#2E6BFF]/30 flex items-center justify-center text-[#00D2FF] mx-auto">
+              <Sparkles className="w-6 h-6" />
+            </div>
+            <div className="text-lg font-bold text-white">No projects found</div>
+            <p className="text-xs text-[#8B93A7] leading-relaxed">
+              We couldn&apos;t find any projects matching &quot;{searchQuery}&quot; in this category.
+            </p>
+            <button
+              onClick={() => {
+                setSearchQuery("");
+                setActiveCategory("All");
+              }}
+              className="px-5 py-2 rounded-full text-xs font-semibold bg-[#2E6BFF] text-white hover:bg-[#3D79FF] transition-colors"
+            >
+              Reset All Filters
+            </button>
+          </div>
+        ) : (
+          <motion.div
+            layout
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            <AnimatePresence>
+              {filteredProjects.map((project, idx) => (
+                <motion.div
+                  layout
+                  key={project.id}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{
+                    duration: duration.base,
+                    ease: easing.standard,
+                    delay: idx * 0.04,
+                  }}
+                  onMouseMove={(e) => {
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    e.currentTarget.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
+                    e.currentTarget.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
+                  }}
+                  className="spotlight-card group relative rounded-2xl sm:rounded-3xl p-6 bg-[#0B0F1A]/80 backdrop-blur-md border border-white/[0.08] hover:border-[#2E6BFF]/40 hover:bg-[#0E1424] transition-all duration-300 flex flex-col justify-between hover:-translate-y-1 shadow-[0_8px_30px_rgba(0,0,0,0.5)]"
+                >
                 <div className="space-y-4">
                   {/* Top Bar: Category & Author Badge */}
                   <div className="flex items-center justify-between gap-2">
@@ -159,12 +246,18 @@ export default function ProjectShowcase({
                 <div className="pt-6 mt-4 border-t border-white/[0.06] space-y-4">
                   <div className="flex flex-wrap gap-1.5">
                     {project.tech.map((t) => (
-                      <span
+                      <button
                         key={t}
-                        className="px-2 py-0.5 rounded text-[10px] font-medium bg-white/[0.03] text-slate-300 border border-white/[0.06]"
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setSearchQuery(t);
+                        }}
+                        className="px-2 py-0.5 rounded text-[10px] font-medium bg-white/[0.03] hover:bg-[#2E6BFF]/20 text-slate-300 hover:text-white border border-white/[0.06] hover:border-[#2E6BFF]/40 transition-colors"
+                        title={`Filter projects by ${t}`}
                       >
                         {t}
-                      </span>
+                      </button>
                     ))}
                   </div>
 
@@ -180,6 +273,7 @@ export default function ProjectShowcase({
             ))}
           </AnimatePresence>
         </motion.div>
+        )}
       </div>
     </section>
   );

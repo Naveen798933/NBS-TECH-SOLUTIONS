@@ -97,9 +97,9 @@ export default function InteractiveTeamImage({
         <div className="absolute inset-0 bg-gradient-to-t from-[#05070D] via-transparent to-[#05070D]/40 pointer-events-none" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#05070D]/40 via-transparent to-[#05070D]/40 pointer-events-none" />
 
-        {/* Subtle Interactive Instruction Banner (Fades on user hover) */}
+        {/* Subtle Interactive Instruction Banner (Desktop only inside image so mobile faces are 100% visible and unblocked) */}
         <div
-          className={`absolute top-4 left-1/2 -translate-x-1/2 z-20 px-3.5 py-1.5 rounded-full bg-[#05070D]/80 backdrop-blur-md border border-white/10 shadow-lg flex items-center gap-2 pointer-events-none transition-opacity duration-300 ${
+          className={`hidden sm:flex absolute top-4 left-1/2 -translate-x-1/2 z-20 px-3.5 py-1.5 rounded-full bg-[#05070D]/80 backdrop-blur-md border border-white/10 shadow-lg items-center gap-2 pointer-events-none transition-opacity duration-300 ${
             hoveredId ? "opacity-30" : "opacity-90"
           }`}
         >
@@ -200,9 +200,14 @@ export default function InteractiveTeamImage({
 
       {/* Persistent Bottom Bar with 3 quick-click member chips */}
       <div className="px-4 py-3 sm:py-4 bg-[#05070D]/90 backdrop-blur-xl border-t border-white/[0.08] flex flex-col sm:flex-row items-center justify-between gap-3">
-        <div className="text-xs text-[#8B93A7] flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-[#00D2FF] animate-pulse" />
-          <span>Verified Engineering Founders</span>
+        <div className="text-xs text-[#8B93A7] flex items-center justify-between sm:justify-start w-full sm:w-auto gap-2">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-[#00D2FF] animate-pulse" />
+            <span>Verified Engineering Founders</span>
+          </div>
+          <span className="sm:hidden text-[10px] text-[#00D2FF] font-mono">
+            Tap to view profile
+          </span>
         </div>
 
         <div className="grid grid-cols-3 gap-2 w-full sm:w-auto">

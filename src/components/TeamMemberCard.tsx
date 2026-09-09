@@ -8,10 +8,13 @@ import {
   Download,
   ArrowRight,
   ShieldCheck,
+  Mail,
+  Phone,
 } from "lucide-react";
 import { LinkedInIcon, GitHubIcon } from "@/components/icons/SocialIcons";
 import { TeamMember } from "@/data/team";
 import { duration, easing } from "@/motion/tokens";
+import { useToast } from "@/components/Toast";
 
 type TeamMemberCardProps = {
   member: TeamMember;
@@ -24,6 +27,16 @@ export default function TeamMemberCard({
   onSelect,
   index,
 }: TeamMemberCardProps) {
+  const { showToast } = useToast();
+
+  const handleCopyEmail = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (member.contact?.email) {
+      navigator.clipboard.writeText(member.contact.email);
+      showToast(`Copied ${member.contact.email} to clipboard!`, "success");
+    }
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 24 }}
@@ -34,7 +47,12 @@ export default function TeamMemberCard({
         delay: index * 0.12,
         ease: easing.standard,
       }}
-      className="group relative rounded-3xl p-6 sm:p-7 bg-[#0B0F1A]/85 backdrop-blur-md border border-white/[0.08] hover:border-[#2E6BFF]/50 hover:bg-[#0E1424] transition-all duration-300 flex flex-col justify-between hover:-translate-y-1.5 shadow-[0_10px_35px_rgba(0,0,0,0.6)]"
+      onMouseMove={(e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        e.currentTarget.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
+        e.currentTarget.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
+      }}
+      className="spotlight-card group relative rounded-3xl p-6 sm:p-7 bg-[#0B0F1A]/85 backdrop-blur-md border border-white/[0.08] hover:border-[#2E6BFF]/50 hover:bg-[#0E1424] transition-all duration-300 flex flex-col justify-between hover:-translate-y-1.5 shadow-[0_10px_35px_rgba(0,0,0,0.6)]"
     >
       {/* Top Identity Block */}
       <div className="space-y-5">
@@ -116,7 +134,7 @@ export default function TeamMemberCard({
       <div className="pt-6 mt-6 border-t border-white/[0.06] space-y-3">
         {/* Social Links & Resume Download */}
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5">
             {member.links.linkedin && (
               <a
                 href={member.links.linkedin}
@@ -125,6 +143,7 @@ export default function TeamMemberCard({
                 onClick={(e) => e.stopPropagation()}
                 className="p-2 rounded-xl bg-white/[0.04] hover:bg-[#2E6BFF]/20 border border-white/10 hover:border-[#2E6BFF]/40 text-[#8B93A7] hover:text-white transition-all"
                 aria-label={`${member.name}'s LinkedIn`}
+                title={`${member.name}'s LinkedIn`}
               >
                 <LinkedInIcon className="w-3.5 h-3.5 text-[#00D2FF]" />
               </a>
@@ -137,9 +156,35 @@ export default function TeamMemberCard({
                 onClick={(e) => e.stopPropagation()}
                 className="p-2 rounded-xl bg-white/[0.04] hover:bg-[#2E6BFF]/20 border border-white/10 hover:border-[#2E6BFF]/40 text-[#8B93A7] hover:text-white transition-all"
                 aria-label={`${member.name}'s GitHub`}
+                title={`${member.name}'s GitHub`}
               >
                 <GitHubIcon className="w-3.5 h-3.5 text-white" />
               </a>
+            )}
+            {member.contact?.phone && (
+              <a
+                href={`tel:${member.contact.phone?.replace(/\s+/g, "")}`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  showToast(`Opening dial pad for ${member.name}...`, "info");
+                }}
+                className="p-2 rounded-xl bg-white/[0.04] hover:bg-emerald-500/20 border border-white/10 hover:border-emerald-500/40 text-[#8B93A7] hover:text-emerald-400 transition-all"
+                aria-label={`Call ${member.name} (${member.contact.phone})`}
+                title={`Call ${member.name} (${member.contact.phone})`}
+              >
+                <Phone className="w-3.5 h-3.5" />
+              </a>
+            )}
+            {member.contact?.email && (
+              <button
+                type="button"
+                onClick={handleCopyEmail}
+                className="p-2 rounded-xl bg-white/[0.04] hover:bg-[#2E6BFF]/20 border border-white/10 hover:border-[#2E6BFF]/40 text-[#8B93A7] hover:text-[#00D2FF] transition-all"
+                aria-label={`Copy ${member.name}'s email address`}
+                title={`Copy ${member.contact.email}`}
+              >
+                <Mail className="w-3.5 h-3.5" />
+              </button>
             )}
           </div>
 

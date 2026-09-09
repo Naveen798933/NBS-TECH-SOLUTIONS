@@ -18,13 +18,15 @@ import {
 import { LinkedInIcon } from "@/components/icons/SocialIcons";
 import confetti from "canvas-confetti";
 import { easing, duration } from "@/motion/tokens";
+import { useToast } from "@/components/Toast";
 
 export default function Contact() {
+  const { showToast } = useToast();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
-    service: "Web Development",
+    service: "Web Application Development",
     message: "",
   });
 
@@ -38,12 +40,14 @@ export default function Contact() {
   const handleCopyEmail = () => {
     navigator.clipboard.writeText("nbstechsolutions3@gmail.com");
     setCopiedEmail(true);
+    showToast("Copied nbstechsolutions3@gmail.com to clipboard!", "success");
     setTimeout(() => setCopiedEmail(false), 2000);
   };
 
   const handleCopyPhone = () => {
     navigator.clipboard.writeText("+917989335763");
     setCopiedPhone(true);
+    showToast("Copied +91 79893 35763 to clipboard!", "success");
     setTimeout(() => setCopiedPhone(false), 2000);
   };
 
@@ -84,6 +88,7 @@ export default function Contact() {
 
       if (res.ok && data.success) {
         setSubmitted(true);
+        showToast("Project inquiry dispatched to founders!", "success");
         try {
           confetti({
             particleCount: 80,

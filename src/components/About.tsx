@@ -94,17 +94,24 @@ export default function About() {
                   delay: idx * 0.08,
                   ease: easing.standard,
                 }}
-                className="group p-6 sm:p-8 rounded-2xl bg-[#0B0F1A]/70 backdrop-blur-md border border-white/[0.08] hover:border-[#2E6BFF]/40 hover:bg-[#0B0F1A] transition-all duration-300 hover:-translate-y-1 shadow-[0_4px_24px_rgba(0,0,0,0.4)]"
+                onMouseMove={(e) => {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  e.currentTarget.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
+                  e.currentTarget.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
+                }}
+                className="spotlight-card group p-6 sm:p-8 rounded-2xl bg-[#0B0F1A]/70 backdrop-blur-md border border-white/[0.08] hover:border-[#2E6BFF]/40 hover:bg-[#0B0F1A] transition-all duration-300 hover:-translate-y-1 shadow-[0_4px_24px_rgba(0,0,0,0.4)]"
               >
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#2E6BFF]/20 to-[#00D2FF]/10 border border-[#2E6BFF]/30 flex items-center justify-center text-[#00D2FF] mb-5 group-hover:scale-110 transition-transform duration-300">
-                  <Icon className="w-6 h-6" />
+                <div className="relative z-10">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#2E6BFF]/20 to-[#00D2FF]/10 border border-[#2E6BFF]/30 flex items-center justify-center text-[#00D2FF] mb-5 group-hover:scale-110 transition-transform duration-300 shadow-[0_0_15px_rgba(46,107,255,0.2)]">
+                    <Icon className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-lg font-bold text-white mb-2 tracking-tight group-hover:text-[#00D2FF] transition-colors">
+                    {item.title}
+                  </h3>
+                  <p className="text-sm text-[#8B93A7] leading-relaxed">
+                    {item.desc}
+                  </p>
                 </div>
-                <h3 className="text-lg font-bold text-white mb-2 tracking-tight group-hover:text-[#00D2FF] transition-colors">
-                  {item.title}
-                </h3>
-                <p className="text-sm text-[#8B93A7] leading-relaxed">
-                  {item.desc}
-                </p>
               </motion.div>
             );
           })}
