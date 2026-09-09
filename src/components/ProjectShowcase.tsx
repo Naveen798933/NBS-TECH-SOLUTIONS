@@ -42,7 +42,7 @@ export default function ProjectShowcase({
   };
 
   return (
-    <section id="projects" className="relative py-24 sm:py-32 bg-[#05070D] border-t border-white/[0.06]">
+    <section id="projects" className="relative py-24 sm:py-32 bg-[#05070D] border-t border-white/[0.06] scroll-mt-20">
       {/* Glow Backdrop */}
       <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-[#2E6BFF]/10 rounded-full blur-[160px] pointer-events-none" />
 
@@ -68,12 +68,14 @@ export default function ProjectShowcase({
         </div>
 
         {/* Filter Tabs */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
+        <div className="flex flex-wrap items-center justify-center gap-2 mb-12" role="tablist" aria-label="Project Categories">
           {categories.map((cat) => {
             const isActive = activeCategory === cat;
             return (
               <button
                 key={cat}
+                role="tab"
+                aria-selected={isActive}
                 onClick={() => setActiveCategory(cat)}
                 className={`relative px-4 py-2 rounded-full text-xs font-semibold transition-all duration-200 ${
                   isActive

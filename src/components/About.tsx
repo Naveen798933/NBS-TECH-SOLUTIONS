@@ -50,7 +50,7 @@ export default function About() {
   ];
 
   return (
-    <section id="about" className="relative py-24 sm:py-32 bg-[#05070D]">
+    <section id="about" className="relative py-24 sm:py-32 bg-[#05070D] scroll-mt-20">
       {/* Background Accent Gradients */}
       <div className="absolute top-1/2 left-0 w-80 h-80 bg-[#2E6BFF]/10 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute bottom-0 right-0 w-80 h-80 bg-[#00D2FF]/10 rounded-full blur-[140px] pointer-events-none" />

@@ -90,7 +90,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="relative py-24 sm:py-32 bg-[#05070D] border-t border-white/[0.06]">
+    <section id="contact" className="relative py-24 sm:py-32 bg-[#05070D] border-t border-white/[0.06] scroll-mt-20">
       {/* Glow Beams */}
       <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 bg-[#2E6BFF]/15 blur-[160px] pointer-events-none" />
 

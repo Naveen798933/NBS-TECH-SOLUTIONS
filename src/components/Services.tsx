@@ -34,7 +34,7 @@ export default function Services() {
   };
 
   return (
-    <section id="services" className="relative py-24 sm:py-32 bg-[#05070D] border-t border-white/[0.06]">
+    <section id="services" className="relative py-24 sm:py-32 bg-[#05070D] border-t border-white/[0.06] scroll-mt-20">
       {/* Background Gradients */}
       <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-[#2E6BFF]/10 rounded-full blur-[140px] pointer-events-none" />
 

@@ -37,7 +37,7 @@ const techRow2 = [
 
 export default function TechStackMarquee() {
   return (
-    <section id="tech-stack" className="relative py-24 bg-[#05070D] overflow-hidden border-t border-white/[0.06]">
+    <section id="tech-stack" className="relative py-24 bg-[#05070D] overflow-hidden border-t border-white/[0.06] scroll-mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 text-center space-y-4">
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0B0F1A] border border-white/10 text-xs font-mono uppercase tracking-widest text-[#00D2FF]">
           <Cpu className="w-3.5 h-3.5" />

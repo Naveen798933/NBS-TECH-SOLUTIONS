@@ -12,7 +12,7 @@ type TeamSectionProps = {
 
 export default function TeamSection({ onSelectMember }: TeamSectionProps) {
   return (
-    <section id="team" className="relative py-24 sm:py-32 bg-[#05070D] border-t border-white/[0.06]">
+    <section id="team" className="relative py-24 sm:py-32 bg-[#05070D] border-t border-white/[0.06] scroll-mt-20">
       {/* Background Ambience */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[#2E6BFF]/10 blur-[150px] pointer-events-none" />
 
