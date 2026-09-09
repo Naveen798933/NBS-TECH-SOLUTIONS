@@ -127,7 +127,7 @@ export default function Navbar() {
         {/* Mobile Menu Trigger */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2 rounded-xl bg-[#0B0F1A] border border-white/10 text-[#8B93A7] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2E6BFF]"
+          className="md:hidden mr-5 md:mr-0 p-2 rounded-xl bg-[#0B0F1A] border border-white/10 text-[#8B93A7] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2E6BFF]"
           aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
           aria-expanded={mobileMenuOpen}
         >
