@@ -23,6 +23,7 @@ export default function Contact() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    phone: "",
     service: "Web Development",
     message: "",
   });
@@ -30,6 +31,7 @@ export default function Contact() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [copiedPhone, setCopiedPhone] = useState(false);
 
@@ -52,13 +54,13 @@ export default function Contact() {
     }
     if (!formData.email.trim()) {
       errs.email = "Email address is required";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
       errs.email = "Please enter a valid email address";
     }
     if (!formData.message.trim()) {
       errs.message = "Please describe your project or inquiry";
-    } else if (formData.message.trim().length < 10) {
-      errs.message = "Message should be at least 10 characters";
+    } else if (formData.message.trim().length < 5) {
+      errs.message = "Message should be at least 5 characters";
     }
     setErrors(errs);
     return Object.keys(errs).length === 0;
@@ -69,23 +71,37 @@ export default function Contact() {
     if (!validate()) return;
 
     setIsSubmitting(true);
+    setSubmitError(null);
 
-    // Simulate reliable delivery
-    await new Promise((res) => setTimeout(res, 800));
-
-    setIsSubmitting(false);
-    setSubmitted(true);
-
-    // Trigger subtle confetti burst
     try {
-      confetti({
-        particleCount: 80,
-        spread: 70,
-        origin: { y: 0.6 },
-        colors: ["#2E6BFF", "#00D2FF", "#ffffff"],
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
       });
-    } catch {
-      // Confetti fallback
+
+      const data = await res.json();
+
+      if (res.ok && data.success) {
+        setSubmitted(true);
+        try {
+          confetti({
+            particleCount: 80,
+            spread: 70,
+            origin: { y: 0.6 },
+            colors: ["#2E6BFF", "#00D2FF", "#ffffff"],
+          });
+        } catch {
+          // Confetti fallback
+        }
+      } else {
+        setSubmitError(data.error || "Unable to send inquiry. Please try again or call directly.");
+      }
+    } catch (err) {
+      console.error("Submission failed:", err);
+      setSubmitError("Network connection error. Please try again or reach out directly.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -172,10 +188,24 @@ export default function Contact() {
                     </div>
                     <div>
                       <div className="text-xs text-[#8B93A7] font-medium">
-                        Direct Lines
+                        Direct Lines (Click to Call)
                       </div>
-                      <div className="text-sm font-semibold text-white">
-                        +91 79893 35763 &bull; +91 95024 22997
+                      <div className="text-sm font-semibold text-white flex flex-wrap items-center gap-x-2 gap-y-1">
+                        <a
+                          href="tel:+917989335763"
+                          className="hover:text-[#00D2FF] underline decoration-white/20 hover:decoration-[#00D2FF] underline-offset-4 transition-colors"
+                          title="Call +91 79893 35763 on phone dial pad"
+                        >
+                          +91 79893 35763
+                        </a>
+                        <span className="text-[#8B93A7]">&bull;</span>
+                        <a
+                          href="tel:+919502422997"
+                          className="hover:text-[#00D2FF] underline decoration-white/20 hover:decoration-[#00D2FF] underline-offset-4 transition-colors"
+                          title="Call +91 95024 22997 on phone dial pad"
+                        >
+                          +91 95024 22997
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -272,18 +302,19 @@ export default function Contact() {
                     <CheckCircle2 className="w-8 h-8" />
                   </div>
                   <h4 className="text-2xl font-bold text-white tracking-tight">
-                    Thank You, {formData.name}!
+                    Inquiry Sent Successfully!
                   </h4>
                   <p className="text-sm text-[#8B93A7] max-w-md mx-auto leading-relaxed">
-                    Your message has been received. One of our founders will review
-                    your inquiry and respond to <span className="text-white font-medium">{formData.email}</span> shortly.
+                    Thank you, <span className="text-white font-medium">{formData.name}</span>! Your project inquiry has been dispatched directly to our founders at <span className="text-[#00D2FF]">nbstechsolutions3@gmail.com</span>. We will review and reply to <span className="text-white font-medium">{formData.email}</span> shortly.
                   </p>
                   <button
                     onClick={() => {
                       setSubmitted(false);
+                      setSubmitError(null);
                       setFormData({
                         name: "",
                         email: "",
+                        phone: "",
                         service: "Web Development",
                         message: "",
                       });
@@ -295,6 +326,13 @@ export default function Contact() {
                 </motion.div>
               ) : (
                 <form onSubmit={handleSubmit} noValidate className="space-y-6">
+                  {submitError && (
+                    <div className="p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs flex items-center gap-2">
+                      <AlertCircle className="w-4 h-4 shrink-0" />
+                      <span>{submitError}</span>
+                    </div>
+                  )}
+
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     {/* Name */}
                     <div className="space-y-2">
@@ -357,29 +395,51 @@ export default function Contact() {
                     </div>
                   </div>
 
-                  {/* Service of Interest */}
-                  <div className="space-y-2">
-                    <label
-                      htmlFor="service"
-                      className="text-xs font-semibold text-slate-200 block"
-                    >
-                      Area of Interest
-                    </label>
-                    <select
-                      id="service"
-                      value={formData.service}
-                      onChange={(e) =>
-                        setFormData({ ...formData, service: e.target.value })
-                      }
-                      className="w-full px-4 py-3 rounded-xl bg-[#05070D] border border-white/10 text-sm text-white focus:outline-none focus:border-[#2E6BFF] focus:ring-2 focus:ring-[#2E6BFF]/30 transition-all"
-                    >
-                      <option value="Web Development">01 — Web Development</option>
-                      <option value="Software Development">02 — Software Development</option>
-                      <option value="AI & Machine Learning">03 — AI &amp; Machine Learning</option>
-                      <option value="Full-Stack Development">04 — Full-Stack Development</option>
-                      <option value="Automation">05 — Workflow Automation</option>
-                      <option value="Business Solutions">06 — Business Solutions</option>
-                    </select>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    {/* Phone Number */}
+                    <div className="space-y-2">
+                      <label
+                        htmlFor="phone"
+                        className="text-xs font-semibold text-slate-200 block"
+                      >
+                        Your Phone Number <span className="text-[#8B93A7] font-normal text-[11px]">(Optional / for calling)</span>
+                      </label>
+                      <input
+                        id="phone"
+                        type="tel"
+                        placeholder="+91 98765 43210"
+                        value={formData.phone}
+                        onChange={(e) =>
+                          setFormData({ ...formData, phone: e.target.value })
+                        }
+                        className="w-full px-4 py-3 rounded-xl bg-[#05070D] border border-white/10 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-[#2E6BFF] focus:ring-2 focus:ring-[#2E6BFF]/30 transition-all"
+                      />
+                    </div>
+
+                    {/* Service of Interest */}
+                    <div className="space-y-2">
+                      <label
+                        htmlFor="service"
+                        className="text-xs font-semibold text-slate-200 block"
+                      >
+                        Area of Interest
+                      </label>
+                      <select
+                        id="service"
+                        value={formData.service}
+                        onChange={(e) =>
+                          setFormData({ ...formData, service: e.target.value })
+                        }
+                        className="w-full px-4 py-3 rounded-xl bg-[#05070D] border border-white/10 text-sm text-white focus:outline-none focus:border-[#2E6BFF] focus:ring-2 focus:ring-[#2E6BFF]/30 transition-all"
+                      >
+                        <option value="Web Development">01 — Web Development</option>
+                        <option value="Software Development">02 — Software Development</option>
+                        <option value="AI & Machine Learning">03 — AI &amp; Machine Learning</option>
+                        <option value="Full-Stack Development">04 — Full-Stack Development</option>
+                        <option value="Automation">05 — Workflow Automation</option>
+                        <option value="Business Solutions">06 — Business Solutions</option>
+                      </select>
+                    </div>
                   </div>
 
                   {/* Message */}
@@ -419,7 +479,7 @@ export default function Contact() {
                     className="w-full py-4 rounded-xl font-semibold text-sm text-white bg-gradient-to-r from-[#2E6BFF] to-[#1B4ED8] hover:from-[#3D79FF] hover:to-[#2257F6] border border-white/20 shadow-[0_0_24px_rgba(46,107,255,0.4)] hover:shadow-[0_0_36px_rgba(46,107,255,0.6)] flex items-center justify-center gap-2 transition-all duration-200 disabled:opacity-50"
                   >
                     {isSubmitting ? (
-                      <span>Sending Message...</span>
+                      <span>Dispatching to Founders...</span>
                     ) : (
                       <>
                         <span>Submit Project Inquiry</span>

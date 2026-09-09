@@ -189,10 +189,14 @@ export default function ProfileModal({ member, onClose }: ProfileModalProps) {
                   )}
 
                   {member.contact?.phone && (
-                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white/[0.04] border border-white/10 text-xs text-[#8B93A7]">
-                      <Phone className="w-3.5 h-3.5 text-emerald-400" />
+                    <a
+                      href={`tel:${member.contact.phone.replace(/\s+/g, "")}`}
+                      className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white/[0.04] hover:bg-emerald-500/20 border border-white/10 hover:border-emerald-500/40 text-xs text-[#8B93A7] hover:text-white transition-all group"
+                      title={`Call ${member.name} (${member.contact.phone}) on phone dial pad`}
+                    >
+                      <Phone className="w-3.5 h-3.5 text-emerald-400 group-hover:scale-110 transition-transform" />
                       <span>{member.contact.phone}</span>
-                    </div>
+                    </a>
                   )}
                 </div>
 
