@@ -96,7 +96,7 @@ export default function ProfileModal({ member, onClose }: ProfileModalProps) {
                 />
               </div>
               <span className="px-2.5 py-1 rounded-full text-[10px] font-mono uppercase tracking-widest bg-[#2E6BFF]/15 text-[#00D2FF] border border-[#2E6BFF]/30">
-                {member.heroPosition} Person &bull; Team Founder
+                Team Founder
               </span>
               <span className="text-xs text-[#8B93A7] hidden sm:inline border-l border-white/10 pl-2">
                 Verified Credentials

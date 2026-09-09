@@ -61,9 +61,9 @@ export default function TeamMemberCard({
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0B0F1A]/90 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
 
-          {/* Location / Position Badge */}
+          {/* Founder Badge */}
           <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-[#05070D]/80 backdrop-blur-md border border-white/10 text-[10px] font-mono uppercase tracking-widest text-[#00D2FF]">
-            {member.heroPosition} Person
+            Team Founder
           </div>
 
           <div className="absolute top-3 right-3 p-1.5 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-400">

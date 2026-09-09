@@ -22,7 +22,6 @@ export default function InteractiveTeamImage({
     id: "satish" | "bhovan" | "naveen";
     name: string;
     role: string;
-    positionLabel: "Left" | "Middle" | "Right";
     style: {
       left: string;
       top: string;
@@ -35,7 +34,6 @@ export default function InteractiveTeamImage({
       id: "satish",
       name: "Satish Reddy",
       role: "AI Analyst — Python Developer",
-      positionLabel: "Left",
       style: {
         left: "7%",
         top: "8%",
@@ -48,7 +46,6 @@ export default function InteractiveTeamImage({
       id: "bhovan",
       name: "Bhovan Chandra",
       role: "Trainee Software Engineer | AI & ML",
-      positionLabel: "Middle",
       style: {
         left: "35%",
         top: "6%",
@@ -61,7 +58,6 @@ export default function InteractiveTeamImage({
       id: "naveen",
       name: "Kota Naveen",
       role: "Full-Stack Web Developer",
-      positionLabel: "Right",
       style: {
         left: "60%",
         top: "8%",
@@ -181,7 +177,7 @@ export default function InteractiveTeamImage({
                   >
                     <div className="p-3.5 rounded-2xl bg-[#05070D]/90 backdrop-blur-xl border border-[#2E6BFF]/40 shadow-[0_12px_36px_rgba(0,0,0,0.8),0_0_20px_rgba(46,107,255,0.3)] text-center">
                       <div className="text-[10px] uppercase font-mono tracking-widest text-[#00D2FF] font-semibold mb-0.5">
-                        {spot.positionLabel} Person
+                        Team Founder
                       </div>
                       <div className="text-sm font-bold text-white tracking-tight">
                         {spot.name}
@@ -235,11 +231,11 @@ export default function InteractiveTeamImage({
                   {member.name.split(" ")[0]}
                 </div>
                 <div className="text-[10px] text-[#8B93A7] truncate">
-                  {member.heroPosition === "left"
-                    ? "Left"
-                    : member.heroPosition === "middle"
-                    ? "Middle"
-                    : "Right"}
+                  {member.id === "satish"
+                    ? "AI Analyst"
+                    : member.id === "bhovan"
+                    ? "Full-Stack Dev"
+                    : "Web Developer"}
                 </div>
               </div>
             </button>

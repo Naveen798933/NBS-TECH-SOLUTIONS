@@ -8,11 +8,11 @@
 
 ## The Engineering Leadership
 
-| Position | Member | Core Domain | Focus |
+| Role | Member | Core Domain | Focus |
 |---|---|---|---|
-| **Left Person** | **Satish Reddy** | AI Analyst & Python Developer | Deep Learning, Machine Learning, Predictive Analytics, Python Engineering |
-| **Middle Person** | **Kokkiligadda Bhovan Chandra** | Trainee Software Engineer & Full-Stack Developer | Distributed Architectures, Full-Stack Development, Applied AI / ML |
-| **Right Person** | **Kota Naveen** | Full-Stack Web Developer | Modern React/Next.js Ecosystems, Cloud Integration, System Architecture |
+| **Co-Founder** | **Satish Reddy** | AI Analyst & Python Developer | Deep Learning, Machine Learning, Predictive Analytics, Python Engineering |
+| **Co-Founder** | **Kokkiligadda Bhovan Chandra** | Trainee Software Engineer & Full-Stack Developer | Distributed Architectures, Full-Stack Development, Applied AI / ML |
+| **Co-Founder** | **Kota Naveen** | Full-Stack Web Developer | Modern React/Next.js Ecosystems, Cloud Integration, System Architecture |
 
 ---
 
