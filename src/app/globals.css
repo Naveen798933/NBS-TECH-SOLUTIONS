@@ -142,7 +142,7 @@ body {
 /* Mobile hamburger menu button horizontal position shift */
 @media (max-width: 767px) {
   .mobile-hamburger-btn {
-    margin-right: 18px !important;
+    margin-right: 28px !important;
     position: relative;
   }
 }
@@ -309,4 +309,25 @@ body {
 .stat-number {
   font-variant-numeric: tabular-nums;
   font-feature-settings: "tnum";
+}
+
+/* Scrollbar Hide — for horizontal filter chip scroll on mobile */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Marquee pause on hover */
+.marquee-row:hover > * {
+  animation-play-state: paused;
+}
+
+/* Enhanced input focus ring */
+.input-field:focus {
+  outline: none;
+  border-color: #2E6BFF !important;
+  box-shadow: 0 0 0 3px rgba(46, 107, 255, 0.18), 0 0 0 1px rgba(46, 107, 255, 0.4);
 }

@@ -138,7 +138,7 @@ export default function About() {
           </div>
 
           <div className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {/* Connecting line on large screens */}
+            {/* Connecting line — only on large screens where cards are in a row */}
             <div className="absolute top-8 left-[12.5%] right-[12.5%] h-[1px] glow-divider hidden lg:block pointer-events-none" />
 
             {[
@@ -173,11 +173,11 @@ export default function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1, duration: duration.base, ease: easing.standard }}
-                className="relative p-5 rounded-2xl bg-[#0B0F1A]/70 border border-white/[0.08] hover:border-white/20 transition-all duration-300 group"
+                className="relative h-full flex flex-col p-5 rounded-2xl bg-[#0B0F1A]/70 border border-white/[0.08] hover:border-white/20 transition-all duration-300 group"
               >
-                {/* Step number circle */}
+                {/* Step number badge */}
                 <div
-                  className="w-10 h-10 rounded-xl flex items-center justify-center text-xs font-bold font-mono mb-4 border"
+                  className="w-10 h-10 rounded-xl flex items-center justify-center text-xs font-bold font-mono mb-4 border shrink-0"
                   style={{
                     backgroundColor: `${item.color}15`,
                     borderColor: `${item.color}40`,
@@ -190,10 +190,11 @@ export default function About() {
                 <h4 className="text-sm font-bold text-white mb-2 group-hover:text-[#00D2FF] transition-colors">
                   {item.title}
                 </h4>
-                <p className="text-xs text-[#8B93A7] leading-relaxed">{item.desc}</p>
+                <p className="text-xs text-[#8B93A7] leading-relaxed flex-1">{item.desc}</p>
               </motion.div>
             ))}
           </div>
+
         </motion.div>
 
         {/* Quality & Transparency Assurance Banner */}

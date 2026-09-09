@@ -52,10 +52,10 @@ export default function TeamMemberCard({
         e.currentTarget.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
         e.currentTarget.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
       }}
-      className="spotlight-card group relative rounded-3xl p-6 sm:p-7 bg-[#0B0F1A]/85 backdrop-blur-md border border-white/[0.08] hover:border-[#2E6BFF]/50 hover:bg-[#0E1424] transition-all duration-300 flex flex-col justify-between hover:-translate-y-1.5 shadow-[0_10px_35px_rgba(0,0,0,0.6)]"
+      className="spotlight-card group relative rounded-3xl p-6 sm:p-7 bg-[#0B0F1A]/85 backdrop-blur-md border border-white/[0.08] hover:border-[#2E6BFF]/50 hover:bg-[#0E1424] transition-all duration-300 flex flex-col justify-between hover:-translate-y-1.5 shadow-[0_10px_35px_rgba(0,0,0,0.6)] h-full"
     >
       {/* Top Identity Block */}
-      <div className="space-y-5">
+      <div className="space-y-5 flex-1 flex flex-col">
         {/* Member Portrait (3:4 ratio matching assets_ready high-res portraits) */}
         <div
           onClick={onSelect}
@@ -90,7 +90,7 @@ export default function TeamMemberCard({
         </div>
 
         {/* Member Details */}
-        <div className="space-y-1.5">
+        <div className="space-y-1.5 flex-1">
           <div className="flex items-center justify-between">
             <h3
               onClick={onSelect}
@@ -108,7 +108,7 @@ export default function TeamMemberCard({
         </div>
 
         {/* Highlight Skills Badges */}
-        <div className="space-y-1.5">
+        <div className="space-y-1.5 pt-1">
           <div className="text-[10px] uppercase tracking-wider font-mono text-[#8B93A7]">
             Core Technologies
           </div>
@@ -141,7 +141,7 @@ export default function TeamMemberCard({
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}
-                className="p-2 rounded-xl bg-white/[0.04] hover:bg-[#2E6BFF]/20 border border-white/10 hover:border-[#2E6BFF]/40 text-[#8B93A7] hover:text-white transition-all"
+                className="w-9 h-9 min-w-[36px] min-h-[36px] flex items-center justify-center rounded-xl bg-white/[0.04] hover:bg-[#2E6BFF]/20 border border-white/10 hover:border-[#2E6BFF]/40 text-[#8B93A7] hover:text-white transition-all"
                 aria-label={`${member.name}'s LinkedIn`}
                 title={`${member.name}'s LinkedIn`}
               >
@@ -154,7 +154,7 @@ export default function TeamMemberCard({
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}
-                className="p-2 rounded-xl bg-white/[0.04] hover:bg-[#2E6BFF]/20 border border-white/10 hover:border-[#2E6BFF]/40 text-[#8B93A7] hover:text-white transition-all"
+                className="w-9 h-9 min-w-[36px] min-h-[36px] flex items-center justify-center rounded-xl bg-white/[0.04] hover:bg-[#2E6BFF]/20 border border-white/10 hover:border-[#2E6BFF]/40 text-[#8B93A7] hover:text-white transition-all"
                 aria-label={`${member.name}'s GitHub`}
                 title={`${member.name}'s GitHub`}
               >
@@ -168,7 +168,7 @@ export default function TeamMemberCard({
                   e.stopPropagation();
                   showToast(`Opening dial pad for ${member.name}...`, "info");
                 }}
-                className="p-2 rounded-xl bg-white/[0.04] hover:bg-emerald-500/20 border border-white/10 hover:border-emerald-500/40 text-[#8B93A7] hover:text-emerald-400 transition-all"
+                className="w-9 h-9 min-w-[36px] min-h-[36px] flex items-center justify-center rounded-xl bg-white/[0.04] hover:bg-emerald-500/20 border border-white/10 hover:border-emerald-500/40 text-[#8B93A7] hover:text-emerald-400 transition-all"
                 aria-label={`Call ${member.name} (${member.contact.phone})`}
                 title={`Call ${member.name} (${member.contact.phone})`}
               >
@@ -179,7 +179,7 @@ export default function TeamMemberCard({
               <button
                 type="button"
                 onClick={handleCopyEmail}
-                className="p-2 rounded-xl bg-white/[0.04] hover:bg-[#2E6BFF]/20 border border-white/10 hover:border-[#2E6BFF]/40 text-[#8B93A7] hover:text-[#00D2FF] transition-all"
+                className="w-9 h-9 min-w-[36px] min-h-[36px] flex items-center justify-center rounded-xl bg-white/[0.04] hover:bg-[#2E6BFF]/20 border border-white/10 hover:border-[#2E6BFF]/40 text-[#8B93A7] hover:text-[#00D2FF] transition-all"
                 aria-label={`Copy ${member.name}'s email address`}
                 title={`Copy ${member.contact.email}`}
               >
@@ -192,7 +192,7 @@ export default function TeamMemberCard({
             href={member.resumeFile}
             download={member.resumeFileName}
             onClick={(e) => e.stopPropagation()}
-            className="inline-flex items-center gap-1.5 text-xs text-[#8B93A7] hover:text-[#00D2FF] font-medium transition-colors"
+            className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-white/[0.03] hover:bg-white/[0.08] border border-white/5 hover:border-white/15 text-xs text-[#8B93A7] hover:text-[#00D2FF] font-medium transition-colors min-h-[36px]"
           >
             <Download className="w-3.5 h-3.5" />
             <span>Resume</span>
@@ -202,7 +202,7 @@ export default function TeamMemberCard({
         {/* View Full Profile CTA */}
         <button
           onClick={onSelect}
-          className="w-full py-2.5 rounded-xl bg-gradient-to-r from-[#2E6BFF] to-[#1B4ED8] hover:from-[#3D79FF] hover:to-[#2257F6] text-white text-xs font-semibold shadow-[0_0_20px_rgba(46,107,255,0.35)] flex items-center justify-center gap-2 transition-all hover:scale-[1.01]"
+          className="w-full py-3 min-h-[44px] rounded-xl bg-gradient-to-r from-[#2E6BFF] to-[#1B4ED8] hover:from-[#3D79FF] hover:to-[#2257F6] text-white text-xs font-semibold shadow-[0_0_20px_rgba(46,107,255,0.35)] flex items-center justify-center gap-2 transition-all hover:scale-[1.01]"
         >
           <span>View Full Profile &amp; Credentials</span>
           <ArrowRight className="w-3.5 h-3.5" />

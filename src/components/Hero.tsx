@@ -140,16 +140,16 @@ export default function Hero({ onSelectMember }: HeroProps) {
           className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 pt-2 w-full max-w-3xl"
         >
           {[
-            { value: '3', label: 'Founding Engineers', color: 'text-white', border: 'hover:border-[#2E6BFF]/50', glow: '' },
-            { value: '13+', label: 'Verified Projects', color: 'text-[#00D2FF]', border: 'hover:border-[#00D2FF]/50', glow: 'hover:shadow-[0_0_20px_rgba(0,210,255,0.15)]' },
-            { value: '100%', label: 'Documented Records', color: 'text-emerald-400', border: 'hover:border-emerald-500/50', glow: 'hover:shadow-[0_0_20px_rgba(16,185,129,0.15)]' },
-            { value: '< 24h', label: 'Direct Response', color: 'text-[#5B8CFF]', border: 'hover:border-[#5B8CFF]/50', glow: 'hover:shadow-[0_0_20px_rgba(91,140,255,0.15)]' },
+            { value: '3', label: 'Founding Engineers', color: 'text-white', border: 'hover:border-[#2E6BFF]/50', glow: 'hover:shadow-[0_0_20px_rgba(46,107,255,0.25)]' },
+            { value: '13+', label: 'Verified Projects', color: 'text-[#00D2FF]', border: 'hover:border-[#00D2FF]/50', glow: 'hover:shadow-[0_0_20px_rgba(0,210,255,0.25)]' },
+            { value: '100%', label: 'Documented Records', color: 'text-emerald-400', border: 'hover:border-emerald-500/50', glow: 'hover:shadow-[0_0_20px_rgba(16,185,129,0.25)]' },
+            { value: '< 24h', label: 'Direct Response', color: 'text-[#5B8CFF]', border: 'hover:border-[#5B8CFF]/50', glow: 'hover:shadow-[0_0_20px_rgba(91,140,255,0.25)]' },
           ].map((stat) => (
             <div
               key={stat.label}
-              className={`stat-number p-3.5 sm:p-4 rounded-2xl bg-[#0B0F1A]/80 border border-white/[0.08] ${stat.border} ${stat.glow} backdrop-blur-md text-center transition-all duration-300 cursor-default`}
+              className={`stat-number p-3.5 sm:p-4 rounded-2xl bg-[#0B0F1A]/80 border border-white/[0.08] ${stat.border} ${stat.glow} backdrop-blur-md text-center transition-all duration-300 cursor-default hover:-translate-y-0.5`}
             >
-              <div className={`text-xl sm:text-2xl font-extrabold tracking-tight ${stat.color}`}>{stat.value}</div>
+              <div className={`text-xl sm:text-2xl font-extrabold tracking-tight ${stat.color} drop-shadow-[0_0_12px_rgba(255,255,255,0.15)]`}>{stat.value}</div>
               <div className="text-[11px] text-[#8B93A7] font-medium mt-0.5 leading-tight">{stat.label}</div>
             </div>
           ))}

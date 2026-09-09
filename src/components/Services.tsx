@@ -98,7 +98,7 @@ export default function Services() {
                     <span className="text-2xl sm:text-3xl font-mono font-bold text-white/20 group-hover:text-[#2E6BFF]/50 transition-colors">
                       {service.number}
                     </span>
-                    <div className="w-12 h-12 rounded-2xl bg-[#05070D] border border-white/10 flex items-center justify-center text-[#2E6BFF] group-hover:text-[#00D2FF] group-hover:scale-110 group-hover:border-[#2E6BFF]/40 transition-all duration-300 shadow-inner">
+                    <div className="w-12 h-12 rounded-2xl bg-[#05070D] border border-white/10 flex items-center justify-center text-[#2E6BFF] group-hover:text-[#00D2FF] group-hover:scale-110 group-hover:border-[#00D2FF]/40 group-hover:shadow-[0_0_20px_rgba(0,210,255,0.35)] transition-all duration-300 shadow-inner">
                       <Icon className="w-6 h-6" />
                     </div>
                   </div>

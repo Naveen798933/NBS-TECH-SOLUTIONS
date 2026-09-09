@@ -58,7 +58,7 @@ export default function TechStackMarquee() {
       </div>
 
       {/* Row 1 - Left to Right */}
-      <div className="relative w-full overflow-hidden py-3">
+      <div className="marquee-row relative w-full overflow-hidden py-3">
         <div className="absolute left-0 top-0 bottom-0 w-24 sm:w-40 bg-gradient-to-r from-[#05070D] to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-24 sm:w-40 bg-gradient-to-l from-[#05070D] to-transparent z-10 pointer-events-none" />
 
@@ -74,7 +74,7 @@ export default function TechStackMarquee() {
           {[...techRow1, ...techRow1].map((tech, idx) => (
             <div
               key={`${tech.name}-${idx}`}
-              className="px-5 py-2.5 rounded-2xl bg-[#0B0F1A]/90 border border-white/[0.08] hover:border-[#2E6BFF]/50 hover:bg-[#0E1424] shadow-md flex items-center gap-3 transition-colors shrink-0 group cursor-default"
+              className="px-5 py-2.5 rounded-2xl bg-[#0B0F1A]/90 border border-white/[0.08] hover:border-[#2E6BFF]/50 hover:bg-[#0E1424] shadow-md flex items-center gap-3 transition-all duration-200 shrink-0 group cursor-default hover:scale-105 hover:shadow-[0_0_20px_rgba(46,107,255,0.15)]"
             >
               <span className="w-2 h-2 rounded-full bg-[#2E6BFF] group-hover:bg-[#00D2FF] transition-colors" />
               <div className="text-left">
@@ -91,7 +91,7 @@ export default function TechStackMarquee() {
       </div>
 
       {/* Row 2 - Right to Left */}
-      <div className="relative w-full overflow-hidden py-3 mt-2">
+      <div className="marquee-row relative w-full overflow-hidden py-3 mt-2">
         <div className="absolute left-0 top-0 bottom-0 w-24 sm:w-40 bg-gradient-to-r from-[#05070D] to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-24 sm:w-40 bg-gradient-to-l from-[#05070D] to-transparent z-10 pointer-events-none" />
 
@@ -107,7 +107,7 @@ export default function TechStackMarquee() {
           {[...techRow2, ...techRow2].map((tech, idx) => (
             <div
               key={`${tech.name}-${idx}`}
-              className="px-5 py-2.5 rounded-2xl bg-[#0B0F1A]/90 border border-white/[0.08] hover:border-[#2E6BFF]/50 hover:bg-[#0E1424] shadow-md flex items-center gap-3 transition-colors shrink-0 group cursor-default"
+              className="px-5 py-2.5 rounded-2xl bg-[#0B0F1A]/90 border border-white/[0.08] hover:border-[#2E6BFF]/50 hover:bg-[#0E1424] shadow-md flex items-center gap-3 transition-all duration-200 shrink-0 group cursor-default hover:scale-105 hover:shadow-[0_0_20px_rgba(0,210,255,0.12)]"
             >
               <span className="w-2 h-2 rounded-full bg-[#00D2FF] group-hover:bg-[#2E6BFF] transition-colors" />
               <div className="text-left">

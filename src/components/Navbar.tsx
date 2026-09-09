@@ -130,7 +130,7 @@ export default function Navbar() {
 
         {/* Desktop CTA & Live Availability */}
         <div className="hidden md:flex items-center gap-3">
-          <div className="hidden lg:inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0B0F1A]/80 border border-white/10 text-[11px] font-mono text-emerald-400">
+          <div className="hidden lg:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0B0F1A]/80 border border-emerald-500/25 text-xs font-semibold text-emerald-400">
             <span className="w-2 h-2 rounded-full bg-emerald-400 live-dot-pulse" />
             <span>Open for Q3/Q4</span>
           </div>
@@ -144,10 +144,10 @@ export default function Navbar() {
           </a>
         </div>
 
-        {/* Mobile Menu Trigger */}
+        {/* Mobile Menu Trigger — shifted left with mr-5 */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="mobile-hamburger-btn md:hidden p-2 rounded-xl bg-[#0B0F1A] border border-white/10 text-[#8B93A7] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2E6BFF] transition-all"
+          className="mobile-hamburger-btn md:hidden mr-5 p-2.5 rounded-xl bg-[#0B0F1A] border border-white/10 text-[#8B93A7] hover:text-white hover:border-[#2E6BFF]/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2E6BFF] transition-all duration-200"
           aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
           aria-expanded={mobileMenuOpen}
         >

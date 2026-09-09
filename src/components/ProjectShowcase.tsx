@@ -109,26 +109,28 @@ export default function ProjectShowcase({
             )}
           </div>
 
-          {/* Filter Tabs */}
-          <div className="flex flex-wrap items-center justify-center gap-2" role="tablist" aria-label="Project Categories">
-            {categories.map((cat) => {
-              const isActive = activeCategory === cat;
-              return (
-                <button
-                  key={cat}
-                  role="tab"
-                  aria-selected={isActive}
-                  onClick={() => setActiveCategory(cat)}
-                  className={`relative px-4 py-2 rounded-full text-xs font-semibold transition-all duration-200 ${
-                    isActive
-                      ? "text-white bg-[#2E6BFF] shadow-[0_0_20px_rgba(46,107,255,0.5)] border border-white/20"
-                      : "text-[#8B93A7] bg-[#0B0F1A] hover:text-white border border-white/[0.08] hover:border-white/20"
-                  }`}
-                >
-                  {cat}
-                </button>
-              );
-            })}
+          {/* Filter Tabs — horizontal scroll on mobile */}
+          <div className="overflow-x-auto scrollbar-hide -mx-4 px-4 sm:mx-0 sm:px-0">
+            <div className="flex items-center gap-2 sm:flex-wrap sm:justify-center min-w-max sm:min-w-0" role="tablist" aria-label="Project Categories">
+              {categories.map((cat) => {
+                const isActive = activeCategory === cat;
+                return (
+                  <button
+                    key={cat}
+                    role="tab"
+                    aria-selected={isActive}
+                    onClick={() => setActiveCategory(cat)}
+                    className={`relative shrink-0 px-4 py-2 rounded-full text-xs font-semibold transition-all duration-200 ${
+                      isActive
+                        ? "text-white bg-[#2E6BFF] shadow-[0_0_20px_rgba(46,107,255,0.5)] border border-white/20"
+                        : "text-[#8B93A7] bg-[#0B0F1A] hover:text-white border border-white/[0.08] hover:border-white/20"
+                    }`}
+                  >
+                    {cat}
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
           {/* Live Counter & Active Search indicator */}

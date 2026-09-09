@@ -20,7 +20,7 @@ export default function Footer() {
       {/* Background glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[200px] bg-[#2E6BFF]/8 blur-[120px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-28 sm:pb-16">
 
         {/* Top CTA Banner */}
         <div className="mb-14 p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-[#0B0F1A] via-[#0E1424] to-[#0B0F1A] border border-[#2E6BFF]/20 relative overflow-hidden">
