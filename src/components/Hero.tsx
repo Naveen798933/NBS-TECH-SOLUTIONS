@@ -23,31 +23,49 @@ export default function Hero({ onSelectMember }: HeroProps) {
       <div className="absolute inset-0 bg-grid-pattern opacity-40 pointer-events-none" />
 
       {/* Radiant Light Beams & Glows */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-gradient-to-tr from-[#2E6BFF]/20 via-[#00D2FF]/10 to-transparent blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-10 left-10 w-96 h-96 bg-[#2E6BFF]/10 blur-[120px] pointer-events-none" />
-      <div className="absolute top-20 right-10 w-80 h-80 bg-[#5B8CFF]/10 blur-[100px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-gradient-to-tr from-[#2E6BFF]/25 via-[#00D2FF]/12 to-transparent blur-[160px] pointer-events-none" />
+      <div className="absolute bottom-10 left-10 w-[500px] h-[500px] bg-[#2E6BFF]/12 blur-[130px] pointer-events-none" />
+      <div className="absolute top-20 right-10 w-80 h-80 bg-[#5B8CFF]/12 blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-1/3 right-1/4 w-64 h-64 bg-[#00D2FF]/8 blur-[100px] pointer-events-none" />
+
+      {/* Floating Decorative Orbs */}
+      <div className="absolute top-1/3 left-[8%] w-3 h-3 rounded-full bg-[#2E6BFF]/60 float-orb blur-sm" />
+      <div className="absolute top-[20%] right-[12%] w-2 h-2 rounded-full bg-[#00D2FF]/70 float-orb-slow" />
+      <div className="absolute bottom-[30%] left-[15%] w-4 h-4 rounded-full bg-[#5B8CFF]/40 float-orb-medium blur-sm" />
+      <div className="absolute top-[60%] right-[8%] w-2.5 h-2.5 rounded-full bg-[#2E6BFF]/50 float-orb" style={{ animationDelay: '3s' }} />
+      <div className="absolute top-[15%] left-[30%] w-1.5 h-1.5 rounded-full bg-[#00D2FF]/60 float-orb-medium" style={{ animationDelay: '1.5s' }} />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col items-center text-center space-y-10">
-        {/* Top Official Logo Badge */}
+        {/* Top Badge Row: Logo + Live Status */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: duration.base, ease: easing.standard }}
-          className="inline-flex items-center gap-3 p-1.5 pr-4 rounded-2xl bg-white shadow-[0_0_30px_rgba(46,107,255,0.35)] border border-white/60"
+          className="flex flex-wrap items-center justify-center gap-3"
         >
-          <div className="h-8 px-2 py-0.5 rounded-xl bg-white flex items-center">
-            <Image
-              src="/images/logo.png"
-              alt="NBS Tech Solutions Official Logo"
-              width={140}
-              height={38}
-              className="h-7 w-auto object-contain"
-              priority
-            />
+          {/* Official Logo Badge */}
+          <div className="inline-flex items-center gap-3 p-1.5 pr-4 rounded-2xl bg-white shadow-[0_0_30px_rgba(46,107,255,0.35)] border border-white/60">
+            <div className="h-8 px-2 py-0.5 rounded-xl bg-white flex items-center">
+              <Image
+                src="/images/logo.png"
+                alt="NBS Tech Solutions Official Logo"
+                width={140}
+                height={38}
+                className="h-7 w-auto object-contain"
+                priority
+              />
+            </div>
+            <span className="text-xs font-bold tracking-wider uppercase text-[#05070D] font-mono border-l border-slate-300 pl-3">
+              Innovate &bull; Develop &bull; Grow
+            </span>
           </div>
-          <span className="text-xs font-bold tracking-wider uppercase text-[#05070D] font-mono border-l border-slate-300 pl-3">
-            Innovate &bull; Develop &bull; Grow
-          </span>
+
+          {/* Live Availability Badge */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-2xl bg-[#0B0F1A]/90 border border-emerald-500/30 backdrop-blur-md shadow-[0_0_20px_rgba(16,185,129,0.15)]">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 live-dot-pulse" />
+            <span className="text-xs font-semibold text-emerald-400 tracking-wide">Available Now</span>
+            <span className="hidden sm:inline text-[10px] text-emerald-400/60 font-mono">— Q3/Q4 2025</span>
+          </div>
         </motion.div>
 
         {/* Cinematic Headline */}
@@ -121,22 +139,20 @@ export default function Hero({ onSelectMember }: HeroProps) {
           transition={{ delay: 0.35, duration: duration.base }}
           className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 pt-2 w-full max-w-3xl"
         >
-          <div className="p-3.5 rounded-2xl bg-[#0B0F1A]/80 border border-white/[0.08] hover:border-[#2E6BFF]/40 backdrop-blur-md text-center transition-colors">
-            <div className="text-xl sm:text-2xl font-extrabold text-white tracking-tight">3</div>
-            <div className="text-[11px] text-[#8B93A7] font-medium mt-0.5">Founding Engineers</div>
-          </div>
-          <div className="p-3.5 rounded-2xl bg-[#0B0F1A]/80 border border-white/[0.08] hover:border-[#2E6BFF]/40 backdrop-blur-md text-center transition-colors">
-            <div className="text-xl sm:text-2xl font-extrabold text-white tracking-tight">13+</div>
-            <div className="text-[11px] text-[#8B93A7] font-medium mt-0.5">Verified Projects</div>
-          </div>
-          <div className="p-3.5 rounded-2xl bg-[#0B0F1A]/80 border border-white/[0.08] hover:border-[#2E6BFF]/40 backdrop-blur-md text-center transition-colors">
-            <div className="text-xl sm:text-2xl font-extrabold text-emerald-400 tracking-tight">100%</div>
-            <div className="text-[11px] text-[#8B93A7] font-medium mt-0.5">Documented Records</div>
-          </div>
-          <div className="p-3.5 rounded-2xl bg-[#0B0F1A]/80 border border-white/[0.08] hover:border-[#2E6BFF]/40 backdrop-blur-md text-center transition-colors">
-            <div className="text-xl sm:text-2xl font-extrabold text-[#00D2FF] tracking-tight">&lt; 24h</div>
-            <div className="text-[11px] text-[#8B93A7] font-medium mt-0.5">Direct Response</div>
-          </div>
+          {[
+            { value: '3', label: 'Founding Engineers', color: 'text-white', border: 'hover:border-[#2E6BFF]/50', glow: '' },
+            { value: '13+', label: 'Verified Projects', color: 'text-[#00D2FF]', border: 'hover:border-[#00D2FF]/50', glow: 'hover:shadow-[0_0_20px_rgba(0,210,255,0.15)]' },
+            { value: '100%', label: 'Documented Records', color: 'text-emerald-400', border: 'hover:border-emerald-500/50', glow: 'hover:shadow-[0_0_20px_rgba(16,185,129,0.15)]' },
+            { value: '< 24h', label: 'Direct Response', color: 'text-[#5B8CFF]', border: 'hover:border-[#5B8CFF]/50', glow: 'hover:shadow-[0_0_20px_rgba(91,140,255,0.15)]' },
+          ].map((stat) => (
+            <div
+              key={stat.label}
+              className={`stat-number p-3.5 sm:p-4 rounded-2xl bg-[#0B0F1A]/80 border border-white/[0.08] ${stat.border} ${stat.glow} backdrop-blur-md text-center transition-all duration-300 cursor-default`}
+            >
+              <div className={`text-xl sm:text-2xl font-extrabold tracking-tight ${stat.color}`}>{stat.value}</div>
+              <div className="text-[11px] text-[#8B93A7] font-medium mt-0.5 leading-tight">{stat.label}</div>
+            </div>
+          ))}
         </motion.div>
 
         {/* Secondary Subtitle */}

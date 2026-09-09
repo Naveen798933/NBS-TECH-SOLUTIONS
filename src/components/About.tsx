@@ -117,7 +117,87 @@ export default function About() {
           })}
         </div>
 
+        {/* HOW WE WORK — 4-Step Process Strip */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-5%" }}
+          transition={{ duration: duration.base, ease: easing.standard }}
+          className="mt-20"
+        >
+          <div className="text-center space-y-3 mb-10">
+            <div className="text-xs uppercase tracking-widest font-mono text-[#00D2FF] font-semibold">
+              Our Engineering Process
+            </div>
+            <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+              How We{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2E6BFF] to-[#00D2FF]">
+                Build & Deliver
+              </span>
+            </h3>
+          </div>
+
+          <div className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {/* Connecting line on large screens */}
+            <div className="absolute top-8 left-[12.5%] right-[12.5%] h-[1px] glow-divider hidden lg:block pointer-events-none" />
+
+            {[
+              {
+                step: "01",
+                title: "Discovery & Scoping",
+                desc: "We deeply analyze your requirements, define technical specifications, and map out a clear project scope before writing a single line of code.",
+                color: "#2E6BFF",
+              },
+              {
+                step: "02",
+                title: "Architecture Design",
+                desc: "Our engineers design system architecture, choose the right tech stack, and establish the database schema and API contract first.",
+                color: "#5B8CFF",
+              },
+              {
+                step: "03",
+                title: "Agile Development",
+                desc: "We build in modular sprints with continuous code reviews, test-driven development, and milestone deliveries via private GitHub repos.",
+                color: "#00D2FF",
+              },
+              {
+                step: "04",
+                title: "Deploy & Handover",
+                desc: "We deliver production-grade deployments on cloud infrastructure, complete with documentation, env configs, and a structured handover call.",
+                color: "#34D399",
+              },
+            ].map((item, idx) => (
+              <motion.div
+                key={item.step}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1, duration: duration.base, ease: easing.standard }}
+                className="relative p-5 rounded-2xl bg-[#0B0F1A]/70 border border-white/[0.08] hover:border-white/20 transition-all duration-300 group"
+              >
+                {/* Step number circle */}
+                <div
+                  className="w-10 h-10 rounded-xl flex items-center justify-center text-xs font-bold font-mono mb-4 border"
+                  style={{
+                    backgroundColor: `${item.color}15`,
+                    borderColor: `${item.color}40`,
+                    color: item.color,
+                    boxShadow: `0 0 16px ${item.color}20`,
+                  }}
+                >
+                  {item.step}
+                </div>
+                <h4 className="text-sm font-bold text-white mb-2 group-hover:text-[#00D2FF] transition-colors">
+                  {item.title}
+                </h4>
+                <p className="text-xs text-[#8B93A7] leading-relaxed">{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
         {/* Quality & Transparency Assurance Banner */}
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

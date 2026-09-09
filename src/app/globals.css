@@ -225,3 +225,88 @@ body {
 .live-dot-pulse {
   animation: liveDotPulse 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
 }
+
+/* Float Animation for Decorative Orbs */
+@keyframes floatUp {
+  0%, 100% { transform: translateY(0px) scale(1); opacity: 0.6; }
+  33% { transform: translateY(-18px) scale(1.04); opacity: 0.8; }
+  66% { transform: translateY(-10px) scale(0.97); opacity: 0.7; }
+}
+
+.float-orb {
+  animation: floatUp 7s ease-in-out infinite;
+}
+
+.float-orb-slow {
+  animation: floatUp 11s ease-in-out infinite reverse;
+}
+
+.float-orb-medium {
+  animation: floatUp 9s ease-in-out infinite 2s;
+}
+
+/* Animated Gradient Border Utility */
+@keyframes rotateBorder {
+  from { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  to { background-position: 0% 50%; }
+}
+
+.gradient-border {
+  position: relative;
+  background: linear-gradient(var(--bg-card), var(--bg-card)) padding-box,
+    linear-gradient(135deg, #2E6BFF, #00D2FF, #2E6BFF) border-box;
+  border: 1.5px solid transparent;
+}
+
+/* Text Shimmer for Headings */
+@keyframes textShimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.text-shimmer {
+  background: linear-gradient(
+    90deg,
+    #ffffff 0%,
+    #00D2FF 40%,
+    #2E6BFF 50%,
+    #5B8CFF 60%,
+    #ffffff 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textShimmer 4s linear infinite;
+}
+
+/* Section Divider Glow Line */
+.glow-divider {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(46, 107, 255, 0.5),
+    rgba(0, 210, 255, 0.5),
+    rgba(46, 107, 255, 0.5),
+    transparent
+  );
+}
+
+/* Neon Card Border Glow on Hover */
+.neon-hover {
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.neon-hover:hover {
+  box-shadow: 0 0 0 1px rgba(46, 107, 255, 0.4),
+    0 0 30px rgba(46, 107, 255, 0.2),
+    0 0 60px rgba(0, 210, 255, 0.08);
+}
+
+/* Smooth count-up number style */
+.stat-number {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
