@@ -2,8 +2,9 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
-import { Sparkles, ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import InteractiveTeamImage from "./InteractiveTeamImage";
 import { TeamMember } from "@/data/team";
 import { easing, duration } from "@/motion/tokens";
@@ -27,18 +28,26 @@ export default function Hero({ onSelectMember }: HeroProps) {
       <div className="absolute top-20 right-10 w-80 h-80 bg-[#5B8CFF]/10 blur-[100px] pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col items-center text-center space-y-10">
-        {/* Top Tagline Pill */}
+        {/* Top Official Logo Badge */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: duration.base, ease: easing.standard }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0B0F1A]/80 border border-white/10 backdrop-blur-md shadow-[0_0_24px_rgba(46,107,255,0.2)]"
+          className="inline-flex items-center gap-3 p-1.5 pr-4 rounded-2xl bg-white shadow-[0_0_30px_rgba(46,107,255,0.35)] border border-white/60"
         >
-          <Sparkles className="w-3.5 h-3.5 text-[#00D2FF]" />
-          <span className="text-xs font-semibold tracking-wider uppercase text-slate-200">
-            NBS Tech Solutions &bull; Innovate | Develop | Grow
+          <div className="h-8 px-2 py-0.5 rounded-xl bg-white flex items-center">
+            <Image
+              src="/images/logo.png"
+              alt="NBS Tech Solutions Official Logo"
+              width={140}
+              height={38}
+              className="h-7 w-auto object-contain"
+              priority
+            />
+          </div>
+          <span className="text-xs font-bold tracking-wider uppercase text-[#05070D] font-mono border-l border-slate-300 pl-3">
+            Innovate &bull; Develop &bull; Grow
           </span>
-          <span className="w-1.5 h-1.5 rounded-full bg-[#2E6BFF] animate-ping" />
         </motion.div>
 
         {/* Cinematic Headline */}

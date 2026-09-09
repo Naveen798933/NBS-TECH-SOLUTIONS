@@ -2,6 +2,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { easing, duration } from "@/motion/tokens";
@@ -57,11 +58,17 @@ export default function Navbar() {
           className="group flex items-center gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2E6BFF] rounded-lg p-1"
           aria-label="NBS Tech Solutions Home"
         >
-          <div className="relative w-9 h-9 rounded-xl bg-gradient-to-br from-[#2E6BFF] to-[#1442B3] flex items-center justify-center font-bold text-white shadow-[0_0_20px_rgba(46,107,255,0.5)] border border-white/20 transition-transform duration-200 group-hover:scale-105">
-            <span className="text-sm tracking-wider font-mono">NBS</span>
-            <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-[#00D2FF] rounded-full border-2 border-[#05070D]" />
+          <div className="relative h-9 sm:h-10 px-2.5 py-1 rounded-xl bg-white flex items-center shadow-[0_0_20px_rgba(46,107,255,0.35)] border border-white/40 transition-transform duration-200 group-hover:scale-105">
+            <Image
+              src="/images/logo.png"
+              alt="NBS Tech Solutions Logo"
+              width={140}
+              height={40}
+              className="h-7 sm:h-8 w-auto object-contain"
+              priority
+            />
           </div>
-          <div className="flex flex-col">
+          <div className="hidden sm:flex flex-col">
             <span className="text-sm sm:text-base font-bold tracking-tight text-white flex items-center gap-1.5">
               NBS TECH SOLUTIONS
               <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#2E6BFF] animate-pulse" />

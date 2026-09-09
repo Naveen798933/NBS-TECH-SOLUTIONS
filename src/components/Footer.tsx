@@ -2,6 +2,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { ArrowUp, Mail } from "lucide-react";
 import { LinkedInIcon, GitHubIcon } from "@/components/icons/SocialIcons";
 
@@ -20,8 +21,14 @@ export default function Footer() {
           {/* Brand Col */}
           <div className="md:col-span-2 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#2E6BFF] to-[#1442B3] flex items-center justify-center font-bold text-white text-xs shadow-[0_0_16px_rgba(46,107,255,0.4)]">
-                NBS
+              <div className="relative h-10 px-3 py-1 rounded-xl bg-white flex items-center shadow-[0_0_20px_rgba(46,107,255,0.3)] border border-white/40">
+                <Image
+                  src="/images/logo.png"
+                  alt="NBS Tech Solutions Official Logo"
+                  width={150}
+                  height={42}
+                  className="h-8 w-auto object-contain"
+                />
               </div>
               <span className="text-base font-bold text-white tracking-tight">
                 NBS TECH SOLUTIONS

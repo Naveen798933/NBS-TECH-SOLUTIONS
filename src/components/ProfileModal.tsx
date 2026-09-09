@@ -85,12 +85,21 @@ export default function ProfileModal({ member, onClose }: ProfileModalProps) {
         >
           {/* Header Bar */}
           <div className="sticky top-0 z-20 px-6 py-4 bg-[#0B0F1A]/90 backdrop-blur-md border-b border-white/[0.08] flex items-center justify-between">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2.5">
+              <div className="h-7 px-2 py-0.5 rounded-lg bg-white flex items-center shadow-sm">
+                <Image
+                  src="/images/logo.png"
+                  alt="NBS Tech Solutions"
+                  width={80}
+                  height={22}
+                  className="h-5 w-auto object-contain"
+                />
+              </div>
               <span className="px-2.5 py-1 rounded-full text-[10px] font-mono uppercase tracking-widest bg-[#2E6BFF]/15 text-[#00D2FF] border border-[#2E6BFF]/30">
                 {member.heroPosition} Person &bull; Team Founder
               </span>
-              <span className="text-xs text-[#8B93A7] hidden sm:inline">
-                Verified Resume Credentials
+              <span className="text-xs text-[#8B93A7] hidden sm:inline border-l border-white/10 pl-2">
+                Verified Credentials
               </span>
             </div>
 
