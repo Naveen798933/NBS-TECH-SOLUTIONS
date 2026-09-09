@@ -142,9 +142,10 @@ body {
 /* Mobile hamburger menu button horizontal position shift */
 @media (max-width: 767px) {
   .mobile-hamburger-btn {
-    margin-right: 24px !important;
+    margin-right: 18px !important;
     position: relative;
   }
 }
+
 
 
