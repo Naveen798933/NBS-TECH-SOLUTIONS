@@ -138,3 +138,13 @@ body {
     scroll-behavior: auto !important;
   }
 }
+
+/* Mobile hamburger menu button horizontal position shift */
+@media (max-width: 767px) {
+  .mobile-hamburger-btn {
+    margin-right: 24px !important;
+    position: relative;
+  }
+}
+
+
