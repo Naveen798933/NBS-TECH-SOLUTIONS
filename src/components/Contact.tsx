@@ -12,6 +12,8 @@ import {
   AlertCircle,
   Sparkles,
   ExternalLink,
+  Copy,
+  Check,
 } from "lucide-react";
 import { LinkedInIcon } from "@/components/icons/SocialIcons";
 import confetti from "canvas-confetti";
@@ -28,6 +30,20 @@ export default function Contact() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [copiedEmail, setCopiedEmail] = useState(false);
+  const [copiedPhone, setCopiedPhone] = useState(false);
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText("nbstechsolutions3@gmail.com");
+    setCopiedEmail(true);
+    setTimeout(() => setCopiedEmail(false), 2000);
+  };
+
+  const handleCopyPhone = () => {
+    navigator.clipboard.writeText("+917989335763");
+    setCopiedPhone(true);
+    setTimeout(() => setCopiedPhone(false), 2000);
+  };
 
   const validate = () => {
     const errs: Record<string, string> = {};
@@ -111,35 +127,77 @@ export default function Contact() {
               </p>
 
               <div className="space-y-4 pt-2">
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-[#2E6BFF]/15 border border-[#2E6BFF]/30 flex items-center justify-center text-[#00D2FF] shrink-0">
-                    <Mail className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <div className="text-xs text-[#8B93A7] font-medium">
-                      Primary Inquiries
+                <div className="flex items-start justify-between gap-4 p-3 rounded-2xl bg-white/[0.02] border border-white/[0.04] hover:border-white/[0.08] transition-colors">
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-[#2E6BFF]/15 border border-[#2E6BFF]/30 flex items-center justify-center text-[#00D2FF] shrink-0">
+                      <Mail className="w-5 h-5" />
                     </div>
-                    <a
-                      href="mailto:nbstechsolutions3@gmail.com"
-                      className="text-sm font-semibold text-white hover:text-[#00D2FF] transition-colors"
-                    >
-                      nbstechsolutions3@gmail.com
-                    </a>
+                    <div>
+                      <div className="text-xs text-[#8B93A7] font-medium">
+                        Primary Inquiries
+                      </div>
+                      <a
+                        href="mailto:nbstechsolutions3@gmail.com"
+                        className="text-sm font-semibold text-white hover:text-[#00D2FF] transition-colors break-all"
+                      >
+                        nbstechsolutions3@gmail.com
+                      </a>
+                    </div>
                   </div>
+
+                  <button
+                    onClick={handleCopyEmail}
+                    className="p-2 rounded-lg bg-white/[0.04] hover:bg-[#2E6BFF]/20 border border-white/10 text-[#8B93A7] hover:text-white transition-all flex items-center gap-1 text-[11px]"
+                    title="Copy email to clipboard"
+                    aria-label="Copy email to clipboard"
+                  >
+                    {copiedEmail ? (
+                      <>
+                        <Check className="w-3.5 h-3.5 text-emerald-400" />
+                        <span className="text-emerald-400 font-mono text-[10px]">Copied</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="w-3.5 h-3.5" />
+                        <span className="hidden sm:inline font-mono text-[10px]">Copy</span>
+                      </>
+                    )}
+                  </button>
                 </div>
 
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-[#2E6BFF]/15 border border-[#2E6BFF]/30 flex items-center justify-center text-[#00D2FF] shrink-0">
-                    <Phone className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <div className="text-xs text-[#8B93A7] font-medium">
-                      Direct Lines
+                <div className="flex items-start justify-between gap-4 p-3 rounded-2xl bg-white/[0.02] border border-white/[0.04] hover:border-white/[0.08] transition-colors">
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-[#2E6BFF]/15 border border-[#2E6BFF]/30 flex items-center justify-center text-[#00D2FF] shrink-0">
+                      <Phone className="w-5 h-5" />
                     </div>
-                    <div className="text-sm font-semibold text-white">
-                      +91 79893 35763 &bull; +91 95024 22997
+                    <div>
+                      <div className="text-xs text-[#8B93A7] font-medium">
+                        Direct Lines
+                      </div>
+                      <div className="text-sm font-semibold text-white">
+                        +91 79893 35763 &bull; +91 95024 22997
+                      </div>
                     </div>
                   </div>
+
+                  <button
+                    onClick={handleCopyPhone}
+                    className="p-2 rounded-lg bg-white/[0.04] hover:bg-[#2E6BFF]/20 border border-white/10 text-[#8B93A7] hover:text-white transition-all flex items-center gap-1 text-[11px]"
+                    title="Copy phone number to clipboard"
+                    aria-label="Copy phone number to clipboard"
+                  >
+                    {copiedPhone ? (
+                      <>
+                        <Check className="w-3.5 h-3.5 text-emerald-400" />
+                        <span className="text-emerald-400 font-mono text-[10px]">Copied</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="w-3.5 h-3.5" />
+                        <span className="hidden sm:inline font-mono text-[10px]">Copy</span>
+                      </>
+                    )}
+                  </button>
                 </div>
 
                 <div className="flex items-start gap-4">
