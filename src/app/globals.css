@@ -144,7 +144,7 @@ body {
   .mobile-hamburger-btn {
     position: absolute !important;
     top: 102px !important;
-    right: max(14px, calc(50% - 165px)) !important;
+    right: max(20px, calc(50% - 145px)) !important;
     z-index: 60 !important;
     margin-right: 0 !important;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 15px rgba(46, 107, 255, 0.25) !important;

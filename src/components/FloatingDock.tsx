@@ -45,7 +45,7 @@ export default function FloatingDock() {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 20, scale: 0.9 }}
           transition={{ type: "spring", stiffness: 350, damping: 25 }}
-          className="fixed bottom-6 right-5 sm:right-8 z-40 flex items-center gap-2 p-1.5 rounded-full bg-[#0B0F1A]/90 backdrop-blur-xl border border-white/[0.12] shadow-[0_12px_40px_rgba(0,0,0,0.7),0_0_24px_rgba(46,107,255,0.25)]"
+          className="fixed bottom-6 right-9 sm:right-12 z-40 flex items-center gap-2 p-1.5 rounded-full bg-[#0B0F1A]/90 backdrop-blur-xl border border-white/[0.12] shadow-[0_12px_40px_rgba(0,0,0,0.7),0_0_24px_rgba(46,107,255,0.25)]"
         >
           {/* Quick Call Button */}
           <a
