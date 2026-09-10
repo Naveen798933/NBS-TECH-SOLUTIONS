@@ -139,11 +139,11 @@ body {
   }
 }
 
-/* Mobile hamburger menu button repositioning — floating over upper-right of the white banner */
+/* Mobile hamburger menu button repositioning — floating level with the white banner */
 @media (max-width: 767px) {
   .mobile-hamburger-btn {
     position: absolute !important;
-    top: 126px !important;
+    top: 115px !important;
     right: max(20px, calc(50% - 145px)) !important;
     z-index: 60 !important;
     margin-right: 0 !important;
