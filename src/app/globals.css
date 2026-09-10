@@ -139,11 +139,15 @@ body {
   }
 }
 
-/* Mobile hamburger menu button horizontal position shift */
+/* Mobile hamburger menu button repositioning — floating over upper-right of the white banner */
 @media (max-width: 767px) {
   .mobile-hamburger-btn {
-    margin-right: 28px !important;
-    position: relative;
+    position: absolute !important;
+    top: 102px !important;
+    right: max(14px, calc(50% - 165px)) !important;
+    z-index: 60 !important;
+    margin-right: 0 !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 15px rgba(46, 107, 255, 0.25) !important;
   }
 }
 

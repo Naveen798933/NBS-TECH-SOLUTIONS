@@ -144,10 +144,10 @@ export default function Navbar() {
           </a>
         </div>
 
-        {/* Mobile Menu Trigger — shifted left with mr-5 */}
+        {/* Mobile Menu Trigger — positioned above/right of white banner on mobile */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="mobile-hamburger-btn md:hidden mr-5 p-2.5 rounded-xl bg-[#0B0F1A] border border-white/10 text-[#8B93A7] hover:text-white hover:border-[#2E6BFF]/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2E6BFF] transition-all duration-200"
+          className="mobile-hamburger-btn md:hidden p-2.5 rounded-xl bg-[#0B0F1A] border border-white/10 text-[#8B93A7] hover:text-white hover:border-[#2E6BFF]/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2E6BFF] transition-all duration-200"
           aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
           aria-expanded={mobileMenuOpen}
         >
