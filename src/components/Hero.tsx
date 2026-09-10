@@ -64,7 +64,7 @@ export default function Hero({ onSelectMember }: HeroProps) {
           <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-2xl bg-[#0B0F1A]/90 border border-emerald-500/30 backdrop-blur-md shadow-[0_0_20px_rgba(16,185,129,0.15)]">
             <span className="w-2 h-2 rounded-full bg-emerald-400 live-dot-pulse" />
             <span className="text-xs font-semibold text-emerald-400 tracking-wide">Available Now</span>
-            <span className="hidden sm:inline text-[10px] text-emerald-400/60 font-mono">— Q3/Q4 2025</span>
+            <span className="hidden sm:inline text-[10px] text-emerald-400/60 font-mono">— Q3/Q4 2026</span>
           </div>
         </motion.div>
 

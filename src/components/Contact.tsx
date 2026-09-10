@@ -26,7 +26,7 @@ export default function Contact() {
     name: "",
     email: "",
     phone: "",
-    service: "Web Application Development",
+    service: "Web Development",
     message: "",
   });
 
@@ -439,7 +439,7 @@ export default function Contact() {
                       >
                         <option value="Web Development">01 — Web Development</option>
                         <option value="Software Development">02 — Software Development</option>
-                        <option value="AI & Machine Learning">03 — AI &amp; Machine Learning</option>
+                        <option value="AI & Machine Learning">03 — AI & Machine Learning</option>
                         <option value="Full-Stack Development">04 — Full-Stack Development</option>
                         <option value="Automation">05 — Workflow Automation</option>
                         <option value="Business Solutions">06 — Business Solutions</option>

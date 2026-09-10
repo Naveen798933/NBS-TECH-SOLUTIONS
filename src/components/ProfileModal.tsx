@@ -244,9 +244,11 @@ export default function ProfileModal({ member, onClose }: ProfileModalProps) {
             </div>
 
             {/* Segmented Tab Navigation Bar */}
-            <div className="flex items-center gap-1.5 p-1 rounded-2xl bg-[#05070D]/80 border border-white/[0.08] overflow-x-auto">
+            <div role="tablist" aria-label="Profile sections" className="flex items-center gap-1.5 p-1 rounded-2xl bg-[#05070D]/80 border border-white/[0.08] overflow-x-auto">
               <button
                 type="button"
+                role="tab"
+                aria-selected={activeTab === "overview"}
                 onClick={() => setActiveTab("overview")}
                 className={`px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
                   activeTab === "overview"
@@ -258,6 +260,8 @@ export default function ProfileModal({ member, onClose }: ProfileModalProps) {
               </button>
               <button
                 type="button"
+                role="tab"
+                aria-selected={activeTab === "skills"}
                 onClick={() => setActiveTab("skills")}
                 className={`px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
                   activeTab === "skills"
@@ -269,6 +273,8 @@ export default function ProfileModal({ member, onClose }: ProfileModalProps) {
               </button>
               <button
                 type="button"
+                role="tab"
+                aria-selected={activeTab === "projects"}
                 onClick={() => setActiveTab("projects")}
                 className={`px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
                   activeTab === "projects"
@@ -280,6 +286,8 @@ export default function ProfileModal({ member, onClose }: ProfileModalProps) {
               </button>
               <button
                 type="button"
+                role="tab"
+                aria-selected={activeTab === "experience"}
                 onClick={() => setActiveTab("experience")}
                 className={`px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
                   activeTab === "experience"

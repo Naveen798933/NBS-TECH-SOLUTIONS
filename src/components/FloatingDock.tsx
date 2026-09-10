@@ -169,7 +169,7 @@ export default function FloatingDock() {
 
                   {/* Satish */}
                   <a
-                    href="tel:+919502422997"
+                    href="tel:+918008925730"
                     onClick={() => showToast("Opening dial pad for Satish Reddy...", "info")}
                     className="flex items-center justify-between p-2.5 rounded-2xl bg-white/[0.03] hover:bg-[#2E6BFF]/15 border border-white/[0.06] hover:border-[#2E6BFF]/40 transition-all group"
                   >

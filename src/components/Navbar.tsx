@@ -132,7 +132,7 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-3">
           <div className="hidden lg:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0B0F1A]/80 border border-emerald-500/25 text-xs font-semibold text-emerald-400">
             <span className="w-2 h-2 rounded-full bg-emerald-400 live-dot-pulse" />
-            <span>Open for Q3/Q4</span>
+            <span>Available Now</span>
           </div>
 
           <a
