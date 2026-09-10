@@ -40,7 +40,7 @@ export default function InteractiveTeamImage({
         width: "28%",
         height: "88%",
       },
-      pinPosition: { left: "21%", top: "18%" },
+      pinPosition: { left: "21%", top: "43%" },
     },
     {
       id: "bhovan",
@@ -52,7 +52,7 @@ export default function InteractiveTeamImage({
         width: "25%",
         height: "90%",
       },
-      pinPosition: { left: "47.5%", top: "16%" },
+      pinPosition: { left: "47.5%", top: "40%" },
     },
     {
       id: "naveen",
@@ -64,7 +64,7 @@ export default function InteractiveTeamImage({
         width: "26%",
         height: "88%",
       },
-      pinPosition: { left: "73%", top: "18%" },
+      pinPosition: { left: "73%", top: "43%" },
     },
   ];
 
@@ -143,7 +143,7 @@ export default function InteractiveTeamImage({
                 className="absolute transform -translate-x-1/2 -translate-y-1/2 pointer-events-none"
                 style={{
                   left: "50%",
-                  top: spot.id === "bhovan" ? "22%" : "25%",
+                  top: spot.id === "bhovan" ? "40%" : "43%",
                 }}
               >
                 <div
