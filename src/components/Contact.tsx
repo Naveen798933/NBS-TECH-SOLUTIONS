@@ -82,29 +82,61 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!form.name || !form.email || !form.message || !form.service) {
+    if (!form.name.trim() || !form.email.trim() || !form.message.trim() || !form.service) {
       showToast("Please fill in all required fields.", "error");
       return;
     }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(form.email.trim())) {
+      showToast("Please enter a valid email address.", "error");
+      return;
+    }
+
     setIsSubmitting(true);
     const budgetLabel = BUDGET_STEPS[budget]?.label ?? "Not specified";
     const selectedService = serviceOptions.find((s) => s.id === form.service)?.label ?? form.service;
 
-    const subject = encodeURIComponent(`[NBS Portfolio] Project Inquiry: ${selectedService} from ${form.name}`);
-    const body = encodeURIComponent(
-      `Name: ${form.name}\nEmail: ${form.email}${form.phone ? `\nPhone: ${form.phone}` : ""}${form.company ? `\nCompany: ${form.company}` : ""}\n\nService: ${selectedService}\nBudget Range: ${budgetLabel}\n\nMessage:\n${form.message}\n\n---\nSent via NBS Portfolio Contact Form`
-    );
+    const payload = {
+      access_key: "c393893c-df36-4589-a531-317e92eff1ec",
+      subject: "New Website Enquiry - NBS Tech Solutions",
+      from_name: "NBS Tech Solutions Website",
+      name: form.name.trim(),
+      email: form.email.trim(),
+      phone: form.phone.trim() || "Not provided",
+      company: form.company.trim() || "Not provided",
+      service: selectedService,
+      budget: budgetLabel,
+      message: form.message.trim(),
+    };
 
     try {
-      window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=nbstechsolutions3@gmail.com&su=${subject}&body=${body}`, "_blank");
-      setIsSuccess(true);
-      setForm({ name: "", email: "", company: "", service: "", message: "", phone: "" });
-      setBudget(0);
-      showToast("Gmail opened with your message! Send it to reach us.", "success");
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        setIsSuccess(true);
+        setForm({ name: "", email: "", company: "", service: "", message: "", phone: "" });
+        setBudget(0);
+        showToast("Thank you! Your enquiry has been submitted successfully.", "success");
+        setTimeout(() => {
+          setIsSuccess(false);
+        }, 5000);
+      } else {
+        showToast(data.message || "Submission failed. Please try again.", "error");
+      }
     } catch {
-      showToast("Something went wrong. Please email us directly.", "error");
+      showToast("Network error. Please check your connection and try again.", "error");
     } finally {
-      setTimeout(() => { setIsSubmitting(false); setIsSuccess(false); }, 3000);
+      setIsSubmitting(false);
     }
   };
 
@@ -218,6 +250,8 @@ export default function Contact() {
 
           {/* RIGHT: Form */}
           <motion.form
+            action="https://api.web3forms.com/submit"
+            method="POST"
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -225,6 +259,13 @@ export default function Contact() {
             onSubmit={handleSubmit}
             className="lg:col-span-3 p-6 sm:p-8 rounded-3xl bg-[#0B0F1A]/80 border border-white/[0.08] backdrop-blur-md space-y-6"
           >
+            {/* Web3Forms Metadata & Hidden Form Fields */}
+            <input type="hidden" name="access_key" value="c393893c-df36-4589-a531-317e92eff1ec" />
+            <input type="hidden" name="subject" value="New Website Enquiry - NBS Tech Solutions" />
+            <input type="hidden" name="from_name" value="NBS Tech Solutions Website" />
+            <input type="hidden" name="service" value={serviceOptions.find((s) => s.id === form.service)?.label ?? (form.service || "Not selected")} />
+            <input type="hidden" name="budget" value={BUDGET_STEPS[budget]?.label ?? "Not specified"} />
+
             {/* Name + Email row */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1.5">
@@ -356,13 +397,13 @@ export default function Contact() {
             >
               {isSuccess ? (
                 <>
-                  <CheckCircle2 className="w-5 h-5" />
-                  <span>Opening Gmail... Check your tab!</span>
+                  <CheckCircle2 className="w-5 h-5 text-emerald-400" />
+                  <span className="text-emerald-300">Enquiry Sent Successfully!</span>
                 </>
               ) : isSubmitting ? (
                 <>
                   <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                  <span>Preparing your message...</span>
+                  <span>Submitting your enquiry...</span>
                 </>
               ) : (
                 <>
