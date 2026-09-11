@@ -5,7 +5,7 @@ import React, { createContext, useContext, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle2, Sparkles, X } from "lucide-react";
 
-type ToastType = "success" | "info";
+type ToastType = "success" | "info" | "error";
 
 type ToastItem = {
   id: string;
@@ -54,6 +54,10 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
               {toast.type === "success" ? (
                 <div className="w-5 h-5 rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 shrink-0">
                   <CheckCircle2 className="w-3.5 h-3.5" />
+                </div>
+              ) : toast.type === "error" ? (
+                <div className="w-5 h-5 rounded-full bg-red-500/20 border border-red-500/40 flex items-center justify-center text-red-400 shrink-0">
+                  <X className="w-3.5 h-3.5" />
                 </div>
               ) : (
                 <div className="w-5 h-5 rounded-full bg-[#2E6BFF]/20 border border-[#2E6BFF]/40 flex items-center justify-center text-[#00D2FF] shrink-0">

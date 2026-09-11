@@ -1,7 +1,7 @@
 // src/components/About.tsx
 "use client";
 
-import React from "react";
+import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import {
   Code2,
@@ -12,10 +12,15 @@ import {
   Globe2,
   Shield,
   Layers,
+  BadgeCheck,
+  FileCheck,
+  Lock,
 } from "lucide-react";
 import { easing, duration } from "@/motion/tokens";
 
 export default function About() {
+  const [badgeIdx, setBadgeIdx] = useState(0);
+
   const pillars = [
     {
       icon: Globe2,
@@ -49,6 +54,44 @@ export default function About() {
     },
   ];
 
+  const trustBadges = [
+    {
+      icon: BadgeCheck,
+      label: "Authentic Credentials",
+      sub: "All credentials verified from original records",
+      color: "#2E6BFF",
+    },
+    {
+      icon: FileCheck,
+      label: "100% Original Work",
+      sub: "Every project is uniquely engineered from scratch",
+      color: "#00D2FF",
+    },
+    {
+      icon: Lock,
+      label: "Documented Records",
+      sub: "Fully documented with source-verified resumes",
+      color: "#34D399",
+    },
+  ];
+
+  const handleTilt = (e: React.MouseEvent<HTMLDivElement>) => {
+    const el = e.currentTarget;
+    const rect = el.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    const rotateY = ((e.clientX - cx) / (rect.width / 2)) * 8;
+    const rotateX = -((e.clientY - cy) / (rect.height / 2)) * 6;
+    el.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(4px)`;
+    el.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
+    el.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
+  };
+
+  const resetTilt = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.currentTarget.style.transform =
+      "perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0)";
+  };
+
   return (
     <section id="about" className="relative py-24 sm:py-32 bg-[#05070D] scroll-mt-20">
       {/* Background Accent Gradients */}
@@ -79,7 +122,7 @@ export default function About() {
           </p>
         </div>
 
-        {/* Pillars Grid */}
+        {/* 3D Tilt Pillars Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {pillars.map((item, idx) => {
             const Icon = item.icon;
@@ -94,12 +137,10 @@ export default function About() {
                   delay: idx * 0.08,
                   ease: easing.standard,
                 }}
-                onMouseMove={(e) => {
-                  const rect = e.currentTarget.getBoundingClientRect();
-                  e.currentTarget.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
-                  e.currentTarget.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
-                }}
-                className="spotlight-card group p-6 sm:p-8 rounded-2xl bg-[#0B0F1A]/70 backdrop-blur-md border border-white/[0.08] hover:border-[#2E6BFF]/40 hover:bg-[#0B0F1A] transition-all duration-300 hover:-translate-y-1 shadow-[0_4px_24px_rgba(0,0,0,0.4)]"
+                onMouseMove={handleTilt}
+                onMouseLeave={resetTilt}
+                className="spotlight-card tilt-card group p-6 sm:p-8 rounded-2xl bg-[#0B0F1A]/70 backdrop-blur-md border border-white/[0.08] hover:border-[#2E6BFF]/40 hover:bg-[#0B0F1A] transition-colors duration-300 shadow-[0_4px_24px_rgba(0,0,0,0.4)] cursor-default"
+                style={{ willChange: "transform" }}
               >
                 <div className="relative z-10">
                   <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#2E6BFF]/20 to-[#00D2FF]/10 border border-[#2E6BFF]/30 flex items-center justify-center text-[#00D2FF] mb-5 group-hover:scale-110 transition-transform duration-300 shadow-[0_0_15px_rgba(46,107,255,0.2)]">
@@ -108,16 +149,14 @@ export default function About() {
                   <h3 className="text-lg font-bold text-white mb-2 tracking-tight group-hover:text-[#00D2FF] transition-colors">
                     {item.title}
                   </h3>
-                  <p className="text-sm text-[#8B93A7] leading-relaxed">
-                    {item.desc}
-                  </p>
+                  <p className="text-sm text-[#8B93A7] leading-relaxed">{item.desc}</p>
                 </div>
               </motion.div>
             );
           })}
         </div>
 
-        {/* HOW WE WORK — 4-Step Process Strip */}
+        {/* HOW WE WORK — Animated 4-Step Process */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -138,8 +177,15 @@ export default function About() {
           </div>
 
           <div className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {/* Connecting line — only on large screens where cards are in a row */}
-            <div className="absolute top-8 left-[12.5%] right-[12.5%] h-[1px] glow-divider hidden lg:block pointer-events-none" />
+            {/* Animated connecting line */}
+            <motion.div
+              className="absolute top-8 left-[12.5%] right-[12.5%] h-[1px] glow-divider hidden lg:block pointer-events-none"
+              initial={{ scaleX: 0, opacity: 0 }}
+              whileInView={{ scaleX: 1, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.2, ease: easing.standard, delay: 0.3 }}
+              style={{ transformOrigin: "left" }}
+            />
 
             {[
               {
@@ -172,10 +218,9 @@ export default function About() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: idx * 0.1, duration: duration.base, ease: easing.standard }}
+                transition={{ delay: idx * 0.12, duration: duration.base, ease: easing.standard }}
                 className="relative h-full flex flex-col p-5 rounded-2xl bg-[#0B0F1A]/70 border border-white/[0.08] hover:border-white/20 transition-all duration-300 group"
               >
-                {/* Step number badge */}
                 <div
                   className="w-10 h-10 rounded-xl flex items-center justify-center text-xs font-bold font-mono mb-4 border shrink-0"
                   style={{
@@ -194,11 +239,9 @@ export default function About() {
               </motion.div>
             ))}
           </div>
-
         </motion.div>
 
-        {/* Quality & Transparency Assurance Banner */}
-
+        {/* Quality & Transparency — Badge Carousel */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -206,18 +249,47 @@ export default function About() {
           transition={{ duration: duration.base, ease: easing.standard }}
           className="mt-16 p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-[#0B0F1A] via-[#05070D] to-[#0B0F1A] border border-white/10 flex flex-col md:flex-row items-center justify-between gap-6"
         >
-          <div className="flex items-center gap-4">
+          {/* Shield icon + rotating badge */}
+          <div className="flex items-center gap-4 flex-1">
             <div className="w-12 h-12 rounded-2xl bg-[#2E6BFF]/20 border border-[#2E6BFF]/40 flex items-center justify-center text-[#2E6BFF] shrink-0 shadow-[0_0_20px_rgba(46,107,255,0.3)]">
               <Shield className="w-6 h-6" />
             </div>
             <div>
               <h4 className="text-base sm:text-lg font-bold text-white">
-                Authentic Engineering &amp; Verified Foundations
+                Authentic Engineering & Verified Foundations
               </h4>
-              <p className="text-xs sm:text-sm text-[#8B93A7]">
-                Every project and credential showcased on this website is verified
-                directly from the original academic and professional records of our team.
-              </p>
+              {/* Rotating trust badges */}
+              <div className="mt-2 overflow-hidden h-10">
+                {trustBadges.map((badge, i) => {
+                  const BadgeIcon = badge.icon;
+                  return (
+                    <motion.div
+                      key={badge.label}
+                      initial={false}
+                      animate={{ opacity: badgeIdx === i ? 1 : 0, y: badgeIdx === i ? 0 : 10 }}
+                      className="absolute flex items-center gap-2"
+                    >
+                      <BadgeIcon className="w-3.5 h-3.5 shrink-0" style={{ color: badge.color }} />
+                      <div>
+                        <span className="text-xs font-semibold text-white">{badge.label}</span>
+                        <span className="hidden sm:inline text-xs text-[#8B93A7] ml-2">{badge.sub}</span>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+              {/* Dots */}
+              <div className="flex items-center gap-1.5 mt-6">
+                {trustBadges.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setBadgeIdx(i)}
+                    className={`h-1.5 rounded-full transition-all duration-300 ${
+                      i === badgeIdx ? "w-4 bg-[#2E6BFF]" : "w-1.5 bg-white/20"
+                    }`}
+                  />
+                ))}
+              </div>
             </div>
           </div>
 

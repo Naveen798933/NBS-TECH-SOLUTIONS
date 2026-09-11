@@ -14,11 +14,30 @@
   --border-glow: rgba(46, 107, 255, 0.35);
 }
 
+/* ─── Light Mode ─────────────────────────────── */
+html.light {
+  --bg-primary: #f0f2f8;
+  --bg-elevated: #ffffff;
+  --bg-card: rgba(255, 255, 255, 0.85);
+  --accent: #2e6bff;
+  --accent-glow: rgba(46, 107, 255, 0.2);
+  --accent-cyan: #0097cc;
+  --text-primary: #0d1117;
+  --text-muted: #6b7280;
+  --border-hairline: rgba(0, 0, 0, 0.08);
+  --border-glow: rgba(46, 107, 255, 0.25);
+}
+
 html {
   scroll-behavior: smooth;
   background-color: var(--bg-primary);
   color: var(--text-primary);
   color-scheme: dark;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+html.light {
+  color-scheme: light;
 }
 
 body {
@@ -28,6 +47,7 @@ body {
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease;
 }
 
 /* Subtle background grid pattern */
@@ -335,3 +355,217 @@ body {
   border-color: #2E6BFF !important;
   box-shadow: 0 0 0 3px rgba(46, 107, 255, 0.18), 0 0 0 1px rgba(46, 107, 255, 0.4);
 }
+
+/* ─── AURORA BACKGROUND ──────────────────────── */
+@keyframes aurora {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.aurora-bg {
+  background: linear-gradient(-45deg, #05070D, #0B0F1A, #0D1535, #05070D);
+  background-size: 400% 400%;
+  animation: aurora 18s ease infinite;
+}
+
+/* ─── 3D TILT CARD ───────────────────────────── */
+.tilt-card {
+  transform-style: preserve-3d;
+  transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  will-change: transform;
+}
+
+/* ─── HOLOGRAPHIC SHIMMER ────────────────────── */
+@keyframes holo {
+  0%   { background-position: 0% 50%; opacity: 0; }
+  20%  { opacity: 0.6; }
+  80%  { opacity: 0.6; }
+  100% { background-position: 200% 50%; opacity: 0; }
+}
+
+.holo-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    105deg,
+    transparent 20%,
+    rgba(120, 200, 255, 0.28) 30%,
+    rgba(200, 120, 255, 0.22) 40%,
+    rgba(255, 200, 120, 0.18) 50%,
+    rgba(120, 255, 200, 0.22) 60%,
+    rgba(120, 200, 255, 0.18) 70%,
+    transparent 80%
+  );
+  background-size: 200% 200%;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 2;
+  transition: opacity 0.3s ease;
+}
+
+.holo-card:hover .holo-overlay {
+  animation: holo 2s ease infinite;
+}
+
+/* ─── 3D FLIP CARD ───────────────────────────── */
+.flip-card {
+  perspective: 1200px;
+  min-height: 320px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.55s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+
+.flip-card.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: inherit;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+
+/* ─── LOADING SCREEN ─────────────────────────── */
+@keyframes loadPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(0.97); }
+}
+
+@keyframes loadBarFill {
+  0% { width: 0%; }
+  30% { width: 35%; }
+  60% { width: 65%; }
+  85% { width: 88%; }
+  100% { width: 100%; }
+}
+
+.load-logo-pulse {
+  animation: loadPulse 1.4s ease-in-out infinite;
+}
+
+.load-bar-fill {
+  animation: loadBarFill 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* ─── TYPEWRITER CURSOR ──────────────────────── */
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.typewriter-cursor::after {
+  content: '|';
+  display: inline-block;
+  margin-left: 2px;
+  color: #00D2FF;
+  animation: cursorBlink 1s step-end infinite;
+}
+
+/* ─── SECTION PROGRESS DOTS ──────────────────── */
+.nav-progress-dot {
+  transition: background-color 0.3s ease, transform 0.3s ease, width 0.3s ease;
+  height: 4px;
+  width: 4px;
+  border-radius: 9999px;
+  background-color: rgba(255,255,255,0.2);
+}
+
+.nav-progress-dot.active {
+  background-color: #2E6BFF;
+  width: 16px;
+}
+
+/* ─── TOOLTIP ────────────────────────────────── */
+.tooltip-wrapper {
+  position: relative;
+}
+
+.tooltip-wrapper .tooltip-box {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #0B0F1A;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 10px;
+  padding: 8px 12px;
+  min-width: 160px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 50;
+  white-space: nowrap;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+}
+
+.tooltip-wrapper:hover .tooltip-box {
+  opacity: 1;
+}
+
+/* ─── BUDGET SLIDER ──────────────────────────── */
+input[type="range"].budget-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 9999px;
+  outline: none;
+  cursor: pointer;
+}
+
+input[type="range"].budget-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2E6BFF, #00D2FF);
+  cursor: pointer;
+  box-shadow: 0 0 12px rgba(46,107,255,0.5);
+  transition: box-shadow 0.2s;
+}
+
+input[type="range"].budget-slider::-webkit-slider-thumb:hover {
+  box-shadow: 0 0 20px rgba(46,107,255,0.8);
+}
+
+/* ─── COUNTDOWN CHIP ─────────────────────────── */
+@keyframes countdownPulse {
+  0%, 100% { box-shadow: 0 0 8px rgba(251, 146, 60, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(251, 146, 60, 0.6); }
+}
+
+.countdown-chip {
+  animation: countdownPulse 2.5s ease-in-out infinite;
+}
+
+/* ─── RADAR CHART ────────────────────────────── */
+.radar-polygon {
+  transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ─── SLIDE-IN OVERLAY MENU ──────────────────── */
+.overlay-menu-link {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
