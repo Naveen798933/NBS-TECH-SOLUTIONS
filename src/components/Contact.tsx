@@ -82,14 +82,20 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!form.name.trim() || !form.email.trim() || !form.message.trim() || !form.service) {
-      showToast("Please fill in all required fields.", "error");
+    if (!form.name.trim() || !form.email.trim() || !form.phone.trim() || !form.message.trim() || !form.service) {
+      showToast("Please fill in all required fields including phone number.", "error");
       return;
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(form.email.trim())) {
       showToast("Please enter a valid email address.", "error");
+      return;
+    }
+
+    const phoneDigits = form.phone.replace(/\D/g, "");
+    if (phoneDigits.length < 7) {
+      showToast("Please enter a valid phone number.", "error");
       return;
     }
 
@@ -103,7 +109,7 @@ export default function Contact() {
       from_name: "NBS Tech Solutions Website",
       name: form.name.trim(),
       email: form.email.trim(),
-      phone: form.phone.trim() || "Not provided",
+      phone: form.phone.trim(),
       company: form.company.trim() || "Not provided",
       service: selectedService,
       budget: budgetLabel,
@@ -296,12 +302,14 @@ export default function Contact() {
             {/* Phone + Company row */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-[#8B93A7] uppercase tracking-wider">Phone (Optional)</label>
+                <label className="text-xs font-semibold text-[#8B93A7] uppercase tracking-wider">Phone Number *</label>
                 <input
                   name="phone"
+                  type="tel"
                   value={form.phone}
                   onChange={handleChange}
                   placeholder="+91 XXXXX XXXXX"
+                  required
                   className="input-field w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/[0.08] text-sm text-white placeholder:text-[#8B93A7]/50 transition-all outline-none"
                 />
               </div>
