@@ -187,7 +187,7 @@ export default function TeamMemberCard({ member, index, onSelect }: TeamMemberCa
             className="relative w-16 h-16 rounded-2xl overflow-hidden shrink-0 border-2"
             style={{ borderColor: `${color}60`, boxShadow: `0 0 16px ${color}30` }}
           >
-            <Image src={member.avatar} alt={member.name} fill className="object-cover object-top" />
+            <Image src={member.avatar} alt={member.name} fill sizes="64px" className="object-cover object-top" />
           </div>
           <div className="flex-1 min-w-0">
             <h3 className="text-base font-bold text-white truncate group-hover:text-[#00D2FF] transition-colors">

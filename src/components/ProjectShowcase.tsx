@@ -128,7 +128,9 @@ export default function ProjectShowcase({ onSelectMember }: ProjectShowcaseProps
               />
               {searchQuery && (
                 <button
+                  type="button"
                   onClick={() => setSearchQuery("")}
+                  aria-label="Clear search"
                   className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-[#8B93A7] hover:text-white transition-colors"
                 >
                   <X className="w-4 h-4" />

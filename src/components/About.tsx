@@ -282,8 +282,10 @@ export default function About() {
               <div className="flex items-center gap-1.5 mt-6">
                 {trustBadges.map((_, i) => (
                   <button
+                    type="button"
                     key={i}
                     onClick={() => setBadgeIdx(i)}
+                    aria-label={`View trust badge ${i + 1}`}
                     className={`h-1.5 rounded-full transition-all duration-300 ${
                       i === badgeIdx ? "w-4 bg-[#2E6BFF]" : "w-1.5 bg-white/20"
                     }`}

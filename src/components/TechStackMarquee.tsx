@@ -100,8 +100,8 @@ function MarqueeRow({ items, reverse = false }: { items: TechItem[]; reverse?: b
     <div className="marquee-row overflow-hidden relative">
       <motion.div
         className="flex gap-3"
-        animate={{ x: reverse ? ["0%", "50%"] : ["-50%", "0%"] }}
-        initial={{ x: reverse ? "0%" : "-50%" }}
+        animate={{ x: reverse ? ["-50%", "0%"] : ["0%", "-50%"] }}
+        initial={{ x: reverse ? "-50%" : "0%" }}
         transition={{
           duration: items.length * 2.8,
           ease: "linear",

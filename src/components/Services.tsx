@@ -87,7 +87,7 @@ export default function Services() {
                   delay: index * 0.08,
                   ease: easing.standard,
                 }}
-                className={`flip-card relative ${accent.border}`}
+                className={`flip-card relative ${accent.border} ${isFlipped ? "flipped" : ""}`}
               >
                 {/* Most Popular badge */}
                 {isMostPopular && (
@@ -136,6 +136,7 @@ export default function Services() {
                     {/* Bottom actions */}
                     <div className="relative pt-6 mt-4 border-t border-white/[0.06] flex items-center justify-between">
                       <button
+                        type="button"
                         onClick={() => setFlippedId(isFlipped ? null : service.id)}
                         className="inline-flex items-center gap-1.5 text-xs font-semibold hover:text-white transition-colors focus:outline-none"
                         style={{ color: accent.primary }}
@@ -187,6 +188,7 @@ export default function Services() {
 
                     <div className="pt-4 mt-4 border-t border-white/[0.06] flex items-center justify-between gap-3">
                       <button
+                        type="button"
                         onClick={() => setFlippedId(null)}
                         className="text-xs text-[#8B93A7] hover:text-white flex items-center gap-1.5 transition-colors"
                       >

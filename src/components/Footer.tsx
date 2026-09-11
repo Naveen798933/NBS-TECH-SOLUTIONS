@@ -226,6 +226,7 @@ export default function Footer() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@example.com"
+                  aria-label="Email address for newsletter"
                   className="input-field w-full pl-9 pr-3 py-2.5 rounded-xl bg-white/[0.03] border border-white/[0.08] text-xs text-white placeholder:text-[#8B93A7]/60 outline-none transition-all"
                 />
               </div>

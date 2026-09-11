@@ -133,6 +133,7 @@ export default function ProfileModal({ member, onClose }: ProfileModalProps) {
                   src={member.avatar}
                   alt={member.name}
                   fill
+                  sizes="(max-width: 640px) 128px, 144px"
                   className="object-cover object-top"
                   priority
                 />

@@ -100,7 +100,7 @@ export default function Testimonials() {
         </motion.div>
 
         {/* Carousel — drag to scroll */}
-        <div ref={containerRef} className="relative">
+        <div ref={containerRef} className="relative overflow-hidden">
           <motion.div
             drag="x"
             dragConstraints={containerRef}

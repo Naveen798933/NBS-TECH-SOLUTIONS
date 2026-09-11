@@ -228,6 +228,7 @@ export default function InteractiveTeamImage({
                   src={member.avatar}
                   alt={member.name}
                   fill
+                  sizes="24px"
                   className="object-cover"
                 />
               </div>
