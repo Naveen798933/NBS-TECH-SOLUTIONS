@@ -138,7 +138,6 @@ const codingStatus: Record<string, string[]> = {
 
 export default function TeamMemberCard({ member, index, onSelect }: TeamMemberCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
-  const [holoStyle, setHoloStyle] = useState({});
   const [statusIdx] = useState(() => Math.floor(Math.random() * 3));
 
   const color = memberColors[member.id] ?? "#2E6BFF";

@@ -106,7 +106,7 @@ export default function FloatingDock() {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 20, scale: 0.9 }}
           transition={{ type: "spring", stiffness: 350, damping: 25 }}
-          className="fixed bottom-6 right-9 sm:right-12 z-50 flex flex-col items-end select-none touch-none"
+          className="hidden md:flex fixed bottom-6 right-9 sm:right-12 z-50 flex-col items-end select-none touch-none"
           style={{ willChange: "transform" }}
         >
           {/* Expandable Speed-Dial Calling & Messaging Pop-Up */}

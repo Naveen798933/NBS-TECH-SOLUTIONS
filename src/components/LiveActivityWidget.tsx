@@ -58,7 +58,7 @@ export default function LiveActivityWidget() {
         animate={{ opacity: 1, y: 0, x: 0 }}
         exit={{ opacity: 0, y: 20 }}
         transition={{ type: "spring", stiffness: 300, damping: 25 }}
-        className="fixed bottom-32 left-4 sm:left-6 z-40 select-none"
+        className="hidden sm:block fixed bottom-24 sm:bottom-28 left-4 sm:left-6 z-40 select-none"
       >
         {/* Collapsed pill */}
         {!open && (

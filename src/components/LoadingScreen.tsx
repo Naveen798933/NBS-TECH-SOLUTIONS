@@ -5,23 +5,35 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
+const PARTICLES = [
+  { top: "20%", left: "15%", delay: "0s" },
+  { top: "35%", left: "80%", delay: "0.4s" },
+  { top: "65%", left: "25%", delay: "0.8s" },
+  { top: "75%", left: "70%", delay: "1.2s" },
+  { top: "30%", left: "45%", delay: "1.6s" },
+  { top: "80%", left: "35%", delay: "2.0s" },
+  { top: "15%", left: "65%", delay: "2.4s" },
+  { top: "50%", left: "90%", delay: "2.8s" },
+];
+
 export default function LoadingScreen() {
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(() => {
+    if (typeof window !== "undefined") {
+      return !sessionStorage.getItem("nbs_loading_seen");
+    }
+    return false;
+  });
   const [exiting, setExiting] = useState(false);
 
   useEffect(() => {
-    // Only show once per browser session
-    const seen = sessionStorage.getItem("nbs_loading_seen");
-    if (!seen) {
-      setVisible(true);
-      sessionStorage.setItem("nbs_loading_seen", "1");
-      const timer = setTimeout(() => {
-        setExiting(true);
-        setTimeout(() => setVisible(false), 700);
-      }, 2200);
-      return () => clearTimeout(timer);
-    }
-  }, []);
+    if (!visible) return;
+    sessionStorage.setItem("nbs_loading_seen", "1");
+    const timer = setTimeout(() => {
+      setExiting(true);
+      setTimeout(() => setVisible(false), 700);
+    }, 2200);
+    return () => clearTimeout(timer);
+  }, [visible]);
 
   if (!visible) return null;
 
@@ -39,14 +51,14 @@ export default function LoadingScreen() {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[#2E6BFF]/15 blur-[160px] pointer-events-none" />
 
           {/* Particle dots */}
-          {[...Array(8)].map((_, i) => (
+          {PARTICLES.map((p, i) => (
             <div
               key={i}
               className="absolute w-1 h-1 rounded-full bg-[#2E6BFF]/50 float-orb"
               style={{
-                top: `${15 + Math.random() * 70}%`,
-                left: `${10 + Math.random() * 80}%`,
-                animationDelay: `${i * 0.4}s`,
+                top: p.top,
+                left: p.left,
+                animationDelay: p.delay,
               }}
             />
           ))}

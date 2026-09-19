@@ -71,8 +71,8 @@ export default function ProjectShowcase({ onSelectMember }: ProjectShowcaseProps
       );
     });
 
-    if (sortBy === "AI Projects") list = [...list].sort((a, b) => (a.category === "AI & Machine Learning" ? -1 : 1));
-    else if (sortBy === "Software Projects") list = [...list].sort((a, b) => (a.category === "Software Engineering" ? -1 : 1));
+    if (sortBy === "AI Projects") list = [...list].sort((a, b) => (a.category === "AI & Machine Learning" && b.category !== "AI & Machine Learning" ? -1 : 1));
+    else if (sortBy === "Software Projects") list = [...list].sort((a, b) => (a.category === "Software Engineering" && b.category !== "Software Engineering" ? -1 : 1));
     else list = [...list].sort((a, b) => (a.featured === b.featured ? 0 : a.featured ? -1 : 1));
 
     return list;

@@ -1,7 +1,7 @@
 // src/components/Contact.tsx
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import {
   Send,
@@ -54,19 +54,24 @@ function CharCounter({ current, max }: { current: number; max: number }) {
 export default function Contact() {
   const { showToast } = useToast();
 
-  const [form, setForm] = useState({
-    name: "", email: "", company: "", service: "", message: "", phone: "",
+  const [form, setForm] = useState(() => {
+    let initialService = "";
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      initialService = params.get("service") || "";
+    }
+    return {
+      name: "",
+      email: "",
+      company: "",
+      service: initialService,
+      message: "",
+      phone: "",
+    };
   });
   const [budget, setBudget] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-
-  // Check for ?service= query param to pre-fill
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const svc = params.get("service");
-    if (svc) setForm((prev) => ({ ...prev, service: svc }));
-  }, []);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>

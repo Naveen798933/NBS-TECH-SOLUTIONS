@@ -159,17 +159,52 @@ body {
   }
 }
 
-/* Mobile hamburger menu button repositioning — floating level with the white banner */
-@media (max-width: 767px) {
-  .mobile-hamburger-btn {
-    position: absolute !important;
-    top: 115px !important;
-    right: max(20px, calc(50% - 145px)) !important;
-    z-index: 60 !important;
-    margin-right: 0 !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 15px rgba(46, 107, 255, 0.25) !important;
-  }
+/* ─── Mobile Touch & Safe-Area Utilities ───────── */
+.safe-bottom {
+  padding-bottom: max(1rem, env(safe-area-inset-bottom));
 }
+
+.safe-top {
+  padding-top: max(1rem, env(safe-area-inset-top));
+}
+
+/* Touch active scale feedback */
+.touch-press {
+  transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.15s ease;
+}
+.touch-press:active {
+  transform: scale(0.96);
+  opacity: 0.9;
+}
+
+/* Glass bottom dock */
+.glass-dock {
+  background: rgba(11, 15, 26, 0.88);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 16px 40px -4px rgba(0, 0, 0, 0.75), 0 0 24px -2px rgba(46, 107, 255, 0.25);
+}
+
+html.light .glass-dock {
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 16px 40px -4px rgba(0, 0, 0, 0.15), 0 0 20px -2px rgba(46, 107, 255, 0.15);
+}
+
+/* Native-style bottom sheet drag handle */
+.sheet-drag-handle {
+  width: 36px;
+  height: 4.5px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.25);
+  margin: 8px auto 14px auto;
+}
+
+html.light .sheet-drag-handle {
+  background: rgba(0, 0, 0, 0.2);
+}
+
 
 /* Interactive Card Spotlight (Mouse Follower) */
 .spotlight-card {
@@ -413,8 +448,14 @@ body {
 /* ─── 3D FLIP CARD ───────────────────────────── */
 .flip-card {
   perspective: 1200px;
-  min-height: 390px;
+  min-height: 440px;
   height: 100%;
+}
+
+@media (min-width: 640px) {
+  .flip-card {
+    min-height: 400px;
+  }
 }
 
 .flip-card-inner {

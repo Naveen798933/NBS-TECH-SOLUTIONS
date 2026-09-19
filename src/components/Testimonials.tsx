@@ -1,7 +1,7 @@
 // src/components/Testimonials.tsx
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { motion } from "framer-motion";
 import { Star, Quote, Sparkles } from "lucide-react";
 import { easing, duration } from "@/motion/tokens";
@@ -60,7 +60,6 @@ const testimonials = [
 ];
 
 export default function Testimonials() {
-  const [dragStart, setDragStart] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
@@ -105,7 +104,6 @@ export default function Testimonials() {
             drag="x"
             dragConstraints={containerRef}
             dragElastic={0.1}
-            onDragStart={(_, info) => setDragStart(info.point.x)}
             className="flex gap-5 pb-4 cursor-grab active:cursor-grabbing select-none"
             style={{ width: "max-content" }}
           >

@@ -11,7 +11,6 @@ import {
   Clock,
   Bell,
   CheckCircle2,
-  ExternalLink,
 } from "lucide-react";
 
 // Inline social icons (lucide-react version doesn't export Github/Linkedin)

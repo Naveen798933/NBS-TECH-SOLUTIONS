@@ -16,25 +16,51 @@ import ProfileModal from "@/components/ProfileModal";
 import FloatingDock from "@/components/FloatingDock";
 import LoadingScreen from "@/components/LoadingScreen";
 import LiveActivityWidget from "@/components/LiveActivityWidget";
+import MobileBottomDock from "@/components/MobileBottomDock";
+import ProDeveloperPromptStudio from "@/components/ProDeveloperPromptStudio";
 import { ToastProvider } from "@/components/Toast";
 import { TeamMember } from "@/data/team";
 
+const sectionIds = ["hero", "about", "services", "team", "projects", "tech-stack", "contact"];
+
 export default function Home() {
   const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("nbs_theme") !== "light";
+    }
+    return true;
+  });
+  const [isPromptStudioOpen, setIsPromptStudioOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("hero");
 
-  // Persist theme to localStorage and apply to <html>
+  // Track active scroll section
   useEffect(() => {
-    const saved = localStorage.getItem("nbs_theme");
-    if (saved === "light") {
-      setIsDark(false);
-      document.documentElement.classList.add("light");
-      document.documentElement.classList.remove("dark");
-    } else {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + 160;
+      for (let i = sectionIds.length - 1; i >= 0; i--) {
+        const el = document.getElementById(sectionIds[i]);
+        if (el && el.offsetTop <= scrollPosition) {
+          setActiveSection(sectionIds[i]);
+          break;
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Sync theme classes with <html>
+  useEffect(() => {
+    if (isDark) {
       document.documentElement.classList.add("dark");
       document.documentElement.classList.remove("light");
+    } else {
+      document.documentElement.classList.add("light");
+      document.documentElement.classList.remove("dark");
     }
-  }, []);
+  }, [isDark]);
 
   const handleToggleTheme = () => {
     setIsDark((prev) => {
@@ -57,12 +83,19 @@ export default function Home() {
       {/* Session-throttled loading screen */}
       <LoadingScreen />
 
-      <main className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)] relative selection:bg-[#2E6BFF]/30 selection:text-white">
+      <main className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)] relative selection:bg-[#2E6BFF]/30 selection:text-white pb-16 md:pb-0">
         {/* Sticky Navigation with scroll progress, section dots & theme toggle */}
-        <Navbar isDark={isDark} onToggleTheme={handleToggleTheme} />
+        <Navbar
+          isDark={isDark}
+          onToggleTheme={handleToggleTheme}
+          onOpenPromptStudio={() => setIsPromptStudioOpen(true)}
+        />
 
         {/* Hero Section — typewriter, count-up stats, IST clock, rotating ticker */}
-        <Hero onSelectMember={setSelectedMember} />
+        <Hero
+          onSelectMember={setSelectedMember}
+          onOpenPromptStudio={() => setIsPromptStudioOpen(true)}
+        />
 
         {/* About — 3D tilt cards, animated process timeline, badge carousel */}
         <About />
@@ -88,8 +121,14 @@ export default function Home() {
         {/* Footer — IST clock, newsletter, staggered columns */}
         <Footer />
 
-        {/* Floating Quick Action Dock */}
+        {/* Desktop-Only Floating Quick Action Dock */}
         <FloatingDock />
+
+        {/* Native Mobile Floating Bottom Dock */}
+        <MobileBottomDock
+          activeSection={activeSection}
+          onOpenPromptStudio={() => setIsPromptStudioOpen(true)}
+        />
 
         {/* Mission Control floating widget */}
         <LiveActivityWidget />
@@ -98,6 +137,12 @@ export default function Home() {
         <ProfileModal
           member={selectedMember}
           onClose={() => setSelectedMember(null)}
+        />
+
+        {/* Pro Developer AI Prompt & Architecture Studio */}
+        <ProDeveloperPromptStudio
+          isOpen={isPromptStudioOpen}
+          onClose={() => setIsPromptStudioOpen(false)}
         />
       </main>
     </ToastProvider>

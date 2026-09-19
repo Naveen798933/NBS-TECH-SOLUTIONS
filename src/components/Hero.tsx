@@ -4,13 +4,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Sparkles } from "lucide-react";
 import InteractiveTeamImage from "./InteractiveTeamImage";
 import { TeamMember } from "@/data/team";
 import { easing, duration } from "@/motion/tokens";
 
 type HeroProps = {
   onSelectMember: (member: TeamMember) => void;
+  onOpenPromptStudio?: () => void;
 };
 
 // Animated count-up hook
@@ -65,7 +66,7 @@ const tickerItems = [
   "SaaS Automation Platforms",
 ];
 
-export default function Hero({ onSelectMember }: HeroProps) {
+export default function Hero({ onSelectMember, onOpenPromptStudio }: HeroProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const [statsVisible, setStatsVisible] = useState(false);
   const [tickerIdx, setTickerIdx] = useState(0);
@@ -237,20 +238,36 @@ export default function Hero({ onSelectMember }: HeroProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: duration.scene, ease: easing.standard, delay: 0.3 }}
-          className="flex flex-col sm:flex-row items-center gap-4 pt-2"
+          className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 pt-2 w-full max-w-xl"
         >
+          {/* Pro Developer Studio CTA */}
+          {onOpenPromptStudio && (
+            <button
+              type="button"
+              onClick={onOpenPromptStudio}
+              className="btn-shimmer w-full sm:w-auto px-6 py-3.5 rounded-full font-bold text-sm text-white bg-gradient-to-r from-[#2E6BFF] via-[#5B8CFF] to-[#00D2FF] hover:brightness-110 border border-white/30 shadow-[0_0_35px_rgba(46,107,255,0.5)] transition-all duration-200 hover:-translate-y-0.5 flex items-center justify-center gap-2 group active:scale-95"
+            >
+              <Sparkles className="w-4 h-4 text-white animate-pulse" />
+              <span>AI Project Architect</span>
+              <span className="px-1.5 py-0.5 rounded text-[10px] font-mono uppercase bg-white/20 text-white font-bold ml-1">
+                Studio
+              </span>
+            </button>
+          )}
+
           <a
             href="#team"
-            className="btn-shimmer w-full sm:w-auto px-7 py-3.5 rounded-full font-semibold text-sm text-white bg-gradient-to-r from-[#2E6BFF] to-[#1B4ED8] hover:from-[#3D79FF] hover:to-[#2257F6] border border-white/20 shadow-[0_0_30px_rgba(46,107,255,0.45)] hover:shadow-[0_0_40px_rgba(46,107,255,0.7)] transition-all duration-200 hover:-translate-y-0.5 flex items-center justify-center gap-2"
+            className="w-full sm:w-auto px-6 py-3.5 rounded-full font-semibold text-sm text-white bg-white/[0.08] hover:bg-white/[0.14] border border-white/15 hover:border-white/30 backdrop-blur-md transition-all duration-200 hover:-translate-y-0.5 flex items-center justify-center gap-2"
           >
-            <span>Explore Our Team</span>
-            <ChevronRight className="w-4 h-4" />
+            <span>Explore Team</span>
+            <ChevronRight className="w-4 h-4 text-[#00D2FF]" />
           </a>
+
           <a
             href="#projects"
-            className="w-full sm:w-auto px-7 py-3.5 rounded-full font-semibold text-sm text-slate-200 bg-white/[0.05] hover:bg-white/[0.1] border border-white/10 hover:border-white/20 backdrop-blur-md transition-all duration-200 hover:-translate-y-0.5 flex items-center justify-center gap-2"
+            className="w-full sm:w-auto px-6 py-3.5 rounded-full font-semibold text-sm text-slate-300 hover:text-white bg-transparent hover:bg-white/[0.05] border border-white/10 hover:border-white/20 backdrop-blur-md transition-all duration-200 hover:-translate-y-0.5 flex items-center justify-center gap-2"
           >
-            <span>View Our Work</span>
+            <span>View Work</span>
           </a>
         </motion.div>
 

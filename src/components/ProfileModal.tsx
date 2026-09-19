@@ -66,7 +66,7 @@ export default function ProfileModal({ member, onClose }: ProfileModalProps) {
   return (
     <AnimatePresence>
       <div
-        className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 overflow-y-auto"
+        className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 md:p-6 overflow-hidden"
         role="dialog"
         aria-modal="true"
         aria-labelledby="profile-modal-title"
@@ -86,16 +86,21 @@ export default function ProfileModal({ member, onClose }: ProfileModalProps) {
           ref={modalRef}
           initial={{
             opacity: 0,
-            scale: 0.94,
-            y: member.heroPosition === "left" ? 20 : member.heroPosition === "right" ? 20 : 30,
+            scale: 0.95,
+            y: 50,
           }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.94, y: 20 }}
+          exit={{ opacity: 0, scale: 0.95, y: 30 }}
           transition={{ ...springConfig }}
-          className="relative w-full max-w-4xl max-h-[92vh] flex flex-col bg-[#0B0F1A] border border-white/10 rounded-2xl sm:rounded-3xl shadow-[0_25px_80px_rgba(0,0,0,0.9),0_0_40px_rgba(46,107,255,0.2)] overflow-hidden z-10"
+          className="relative w-full max-w-4xl max-h-[92vh] sm:max-h-[88vh] flex flex-col bg-[#0B0F1A] border border-white/10 rounded-t-3xl sm:rounded-3xl shadow-[0_25px_80px_rgba(0,0,0,0.95),0_0_50px_rgba(46,107,255,0.25)] overflow-hidden z-10 safe-bottom"
         >
+          {/* Mobile Sheet Drag Handle */}
+          <div className="sm:hidden w-full pt-2 flex justify-center">
+            <div className="sheet-drag-handle" />
+          </div>
+
           {/* Header Bar */}
-          <div className="sticky top-0 z-20 px-6 py-4 bg-[#0B0F1A]/90 backdrop-blur-md border-b border-white/[0.08] flex items-center justify-between">
+          <div className="sticky top-0 z-20 px-5 sm:px-6 py-3.5 sm:py-4 bg-[#0B0F1A]/95 backdrop-blur-md border-b border-white/[0.08] flex items-center justify-between">
             <div className="flex items-center gap-2.5">
               <div className="h-7 px-2 py-0.5 rounded-lg bg-white flex items-center shadow-sm">
                 <Image
